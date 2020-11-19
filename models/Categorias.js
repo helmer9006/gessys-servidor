@@ -9,16 +9,17 @@ const categoriasSchema = new Schema({
     lowercase: true,
     trim: true,
   },
-
-  creacion: {
-    type: Date(),
-    default: new Date(),
-    required: true,
-    trim: true,
-  },
   area: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Areas",
+  },
+  creacion: {
+    type: Date,
+    default: Date.now,
+  },
+  actualizacion: {
+    type: Date,
+    default: Date.now,
   },
 });
 

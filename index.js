@@ -28,6 +28,7 @@ app.use( express.static('uploads') );
 // Rutas de la app
 app.use('/api/usuarios', require('./routes/usuarios'));
 app.use('/api/areas', require('./routes/areas'));
+app.use('/api/categorias', require('./routes/categorias'));
 app.use('/api/auth', require('./routes/auth'));
 
 
