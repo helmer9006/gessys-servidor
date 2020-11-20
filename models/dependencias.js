@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const areasSchema = new Schema({
+const dependenciasSchema = new Schema({
   nombre: {
     type: String,
     required: true,
@@ -9,13 +9,17 @@ const areasSchema = new Schema({
     uppercase: true,
     trim: true,
   },
+  descripcion: {
+    type: String,
+    lowercase: true,
+    trim: true,
+  },
   creacion: {
-    type: Date,
-    default: Date.now,
+    type: Date,  
   },
   actualizacion: {
     type: Date,
   },
 });
 
-module.exports = mongoose.model("Areas", areasSchema);
+module.exports = mongoose.model("Dependencias", dependenciasSchema);

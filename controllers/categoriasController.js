@@ -18,7 +18,7 @@ const nuevaCategoria = async (req, res) => {
     res.json({ msg: "Categoria Creada Correctamente" });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: error });
+    return res.status(500).json({ msg: `Ha ocurrido un error`, error: error });
   }
 };
 
@@ -72,8 +72,9 @@ const eliminarCategoria = (req, res) => {
   try {
     Categorias.findByIdAndDelete(id, function (err, doc) {
       if (err) {
-        console.log(err);
-        return res.status(500).json({ msg: `Ha ocurrido un error, ${err} ` });
+        return res
+          .status(500)
+          .json({ msg: "Ha ocurrido un error", error: error });
       } else {
         if (!doc)
           return res
@@ -85,8 +86,7 @@ const eliminarCategoria = (req, res) => {
       }
     });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ msg: `Ha ocurrido un error, ${error} ` });
+    return res.status(500).json({ msg: "Ha ocurrido un error", error: error });
   }
 };
 

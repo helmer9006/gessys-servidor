@@ -14,7 +14,7 @@ const nuevaArea = async (req, res) => {
     res.json({ msg: "Area Creada Correctamente" });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: error });
+    return res.status(500).json({ msg: `Ha ocurrido un error`, error: error });
   }
 };
 
