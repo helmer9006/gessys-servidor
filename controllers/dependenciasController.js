@@ -75,8 +75,9 @@ const eliminarDependencia = (req, res) => {
   try {
     Dependencias.findByIdAndDelete(id, function (error, doc) {
       if (error) {
-     
-        return res.status(500).json({ msg: "Ha ocurrido un error", "error" : error});
+        return res
+          .status(500)
+          .json({ msg: "Ha ocurrido un error", error: error });
       } else {
         if (!doc)
           return res
@@ -88,7 +89,7 @@ const eliminarDependencia = (req, res) => {
       }
     });
   } catch (error) {
-   return res.status(500).json({ msg: "Ha ocurrido un error", "error" : error});
+    return res.status(500).json({ msg: "Ha ocurrido un error", error: error });
   }
 };
 
