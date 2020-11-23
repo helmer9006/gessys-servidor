@@ -13,9 +13,7 @@ const nuevaDependencia = async (req, res) => {
   }
 
   //***************CREAR NUEVA CATEGORIA***************
-  dependencia = new Dependencias(req.body);
-  dependencia.creacion = moment().format("YYYY-MM-DD HH:mm");
-  console.log(dependencia.creacion);
+  dependencia = new Dependencias(req.body);  
   try {
     await dependencia.save();
     res.json({ msg: "Dependencia Creada Correctamente" });

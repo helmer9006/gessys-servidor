@@ -14,8 +14,14 @@ const dependenciasSchema = new Schema({
     lowercase: true,
     trim: true,
   },
+  soporte: {
+    //define si la dependencia ofrece soporte
+    type: Boolean,
+    required: true,
+  },
   creacion: {
-    type: Date,  
+    type: Date,
+    default: Date.now,
   },
   actualizacion: {
     type: Date,

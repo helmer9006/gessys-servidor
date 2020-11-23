@@ -9,9 +9,9 @@ const categoriasSchema = new Schema({
     uppercase: true,
     trim: true,
   },
-  area: {
+  dependencia: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Areas",
+    ref: "Dependencias",
   },
   creacion: {
     type: Date,

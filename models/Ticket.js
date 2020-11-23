@@ -43,10 +43,6 @@ const ticketsSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Categorias",
   },
-  dependencia: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Dependencias",
-  },
   prioridad: {
     type: String,
     required: true,
