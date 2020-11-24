@@ -2,7 +2,7 @@ const Dependencias = require("../models/dependencias");
 const { validationResult, body } = require("express-validator");
 const moment = require("moment");
 
-//***************CREAR NUEVA CATEGORIA***************
+//***************CREAR NUEVA DEPENDENCIA***************
 const nuevaDependencia = async (req, res) => {
   console.log("POST - CREAR NUEVA DEPENDENCIA");
 
@@ -12,7 +12,7 @@ const nuevaDependencia = async (req, res) => {
     return res.status(400).json({ errores: errores.array() });
   }
 
-  //***************CREAR NUEVA CATEGORIA***************
+  //***************CREAR NUEVA DEPENDENCIA***************
   dependencia = new Dependencias(req.body);  
   try {
     await dependencia.save();
@@ -34,15 +34,15 @@ const traerDependencias = async (req, res) => {
   }
 };
 
-//***************MODIFICAR CATEGORIA***************
+//***************MODIFICAR DEPENDENCIA***************
 const actualizarDependencia = (req, res) => {
   console.log("PUT - ACTUALIZAR DEPENDENCIA POR ID");
   const dependencia = req.body;
-  const idCategoria = req.body._id;
+  const idDependencia = req.body._id;
   dependencia.actualizacion = Date.now();
   try {
     Dependencias.findByIdAndUpdate(
-      idCategoria,
+      idDependencia,
       dependencia,
       (error, dependenciaActualizada) => {
         if (error) {
@@ -57,7 +57,7 @@ const actualizarDependencia = (req, res) => {
         }
         return res.status(200).json({
           msg: `Dependencia actualizada correctamente`,
-          categoria: dependenciaActualizada,
+          dependencia: dependenciaActualizada,
         });
       }
     );
@@ -66,7 +66,7 @@ const actualizarDependencia = (req, res) => {
   }
 };
 
-//ELIMINAR CATEGORIA
+//ELIMINAR DEPENDENCIA
 const eliminarDependencia = (req, res) => {
   console.log("DELETE - ELIMINAR DEPENDENCIA POR ID");
   const id = req.params.idDependencia;

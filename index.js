@@ -29,7 +29,7 @@ app.use( express.static('uploads') );
 app.use('/api/usuarios', require('./routes/usuarios'));
 app.use('/api/categorias', require('./routes/categorias'));
 app.use('/api/dependencias', require('./routes/dependencias'));
-//app.use('/api/tickets', require('./routes/tickets'));
+app.use('/api/tickets', require('./routes/tickets'));
 app.use('/api/auth', require('./routes/auth'));
 
 // Arrancar la app

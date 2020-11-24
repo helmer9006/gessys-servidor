@@ -3,55 +3,56 @@ const Schema = mongoose.Schema;
 
 const ticketsSchema = new Schema({
   codigo: {
+    //codigo para identificar el ticket, tres inicial de la dependencia a quien se solicita seguido de numero autoincremental
     type: String,
     required: true,
     unique: true,
     trim: true,
   },
   titulo: {
+    //descripcion corta de la solicitud
     type: String,
     required: true,
     uppercase: true,
     trim: true,
   },
   descripcion: {
+    //descripcion general o amplia de la solicitud
     type: String,
     required: true,
     lowercase: true,
     trim: true,
   },
-  creacion: {
-    type: Date,
-    default: Date.now,
-  },
-  actualizacion: {
-    type: Date,
-  },
   tipo: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Tipos",
+    type: String,
+    required: true,
+    lowercase: true,
+    trim: true,
   },
   usuario: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Usuarios",
   },
-  area: {
+  dependencia: {
+    //dependencia a la que se dirige el ticket
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Areas",
+    ref: "Dependencias",
   },
   categoria: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Categorias",
   },
   prioridad: {
+    //alta, media, baja
     type: String,
     required: true,
     trim: true,
   },
-  estado: {
+  estado: { // Nuevo, Proceso, resuelto, cancelado
     type: String,
     required: true,
     trim: true,
+    default: 'nuevo'
   },
   mensaje: [
     {
@@ -59,6 +60,13 @@ const ticketsSchema = new Schema({
       ref: "Mensajes",
     },
   ],
+  creacion: {
+    type: Date,
+    default: Date.now,
+  },
+  actualizacion: {
+    type: Date,
+  },
 });
 
 module.exports = mongoose.model("Tickets", ticketsSchema);
