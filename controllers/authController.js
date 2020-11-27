@@ -30,6 +30,9 @@ exports.autenticarUsuario = async (req, res, next) => {
         id: usuario._id,
         nombre: usuario.nombre,
         email: usuario.email,
+        perfil: usuario.perfil,
+        dependencia: usuario.dependencia,
+        estado: usuario.estado
       },
       process.env.SECRETA,
       {

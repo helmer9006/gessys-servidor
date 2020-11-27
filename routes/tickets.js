@@ -13,7 +13,6 @@ router.post(
     check("codigo", "El area es Obligatoria").not().isEmpty(),
     check("descripcion", "El area es Obligatoria").not().isEmpty(),
     check("tipo", "El tipo es Obligatorio").not().isEmpty(),
-    check("usuario", "El usuario es Obligatorio").not().isEmpty(),
     check("dependencia", "La dependencia es Obligatoria").not().isEmpty(),
     check("categoria", "La categoria es Obligatoria").not().isEmpty(),
     check("prioridad", "La prioridad es Obligatoria").not().isEmpty(),

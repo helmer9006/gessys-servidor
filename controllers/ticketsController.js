@@ -1,6 +1,5 @@
 const Tickets = require("../models/Ticket");
 const { validationResult, body } = require("express-validator");
-const Ticket = require("../models/Ticket");
 
 //***************CREAR NUEVO TICKET***************
 const nuevoTicket = async (req, res) => {
@@ -13,7 +12,9 @@ const nuevoTicket = async (req, res) => {
   }
 
   //***************CREAR NUEVO TICKETS***************
-  ticket = new Tickets(req.body);
+  const nuevoTicket = req.body;
+  nuevoTicket.usuario = req.usuario.id;
+  ticket = new Tickets(nuevoTicket);
   try {
     await ticket.save();
     res.json({ msg: "Ticket Creado Correctamente" });
@@ -35,12 +36,29 @@ const traerTickets = async (req, res) => {
 
 //***************TRAER TICKETS POR ESTADO***************
 const traerTicketsPorEstado = async (req, res) => {
-  const estado = req.params.estado;
-
   console.log("GET - TRAER TICKETS POR ESTADO ");
+  const estado = req.params.estado;
+  const perfil = req.usuario.perfil;
+  const dependencia = req.usuario.dependencia;
+  const idUsuario = req.usuario.id;
   try {
-    const ticket = await Tickets.find({ estado: estado });
-    res.status(200).json(ticket);
+    if (perfil === "estandar") {
+      const ticket = await Tickets.find({ estado: estado, usuario: idUsuario });
+      res.status(200).json(ticket);
+    }
+    if (perfil === "especial") {
+      const ticket = await Tickets.find({
+        estado: estado,
+        dependencia: dependencia,
+      });
+      res.status(200).json(ticket);
+    }
+    if (perfil === "administrador") {
+      const ticket = await Tickets.find({
+        estado: estado,
+      });
+      res.status(200).json(ticket);
+    }
   } catch (error) {
     return res.status(500).json({ msg: `Ha ocurrido un error`, error: error });
   }

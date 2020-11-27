@@ -31,7 +31,7 @@ app.use('/api/categorias', require('./routes/categorias'));
 app.use('/api/dependencias', require('./routes/dependencias'));
 app.use('/api/tickets', require('./routes/tickets'));
 app.use('/api/auth', require('./routes/auth'));
-
+app.use('/api/mensajes', require('./routes/mensajes'));
 // Arrancar la app
 app.listen(port, '0.0.0.0', () => {
     console.log(`El servidor esta funcionando en el puerto ${port}`);
