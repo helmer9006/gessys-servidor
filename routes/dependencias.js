@@ -8,7 +8,12 @@ const auth = require("../middleware/auth");
 router.post(
   "/",
   auth,
-  [check("nombre", "Nombre es obligatorio").not().isEmpty()],
+  [
+    check("nombre", "Nombre es obligatorio").not().isEmpty(),
+    check("soporte", "Se defe definir si el usuario brindará soporte")
+      .not()
+      .isEmpty(),
+  ],
   dependenciasController.nuevaDependencia
 );
 
@@ -19,7 +24,10 @@ router.get("/", auth, dependenciasController.traerDependencias);
 router.put("/", auth, dependenciasController.actualizarDependencia);
 
 //ELIMINAR DEPENDENCIA
-router.delete("/:idDependencia", auth, dependenciasController.eliminarDependencia);
-
+router.delete(
+  "/:idDependencia",
+  auth,
+  dependenciasController.eliminarDependencia
+);
 
 module.exports = router;

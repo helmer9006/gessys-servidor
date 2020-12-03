@@ -41,6 +41,7 @@ const traerTicketsPorEstado = async (req, res) => {
   const perfil = req.usuario.perfil;
   const dependencia = req.usuario.dependencia;
   const idUsuario = req.usuario.id;
+
   try {
     if (perfil === "estandar") {
       const ticket = await Tickets.find({ estado: estado, usuario: idUsuario });
