@@ -48,7 +48,7 @@ const ticketsSchema = new Schema({
     required: true,
     trim: true,
   },
-  estado: { // Nuevo, Proceso, resuelto, cancelado
+  estado: { // nuevo, proceso, resuelto, cancelado
     type: String,
     required: true,
     trim: true,

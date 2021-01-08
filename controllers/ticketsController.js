@@ -26,9 +26,28 @@ const nuevoTicket = async (req, res) => {
 //***************TRAER TODOS LOS TICKETS***************
 const traerTickets = async (req, res) => {
   console.log("GET - TRAER TODOS LOS TICKETS ");
+  const perfil = req.usuario.perfil;
+  const dependencia = req.usuario.dependencia;
+  const idUsuario = req.usuario.id;
+
   try {
-    const ticket = await Tickets.find({});
-    res.status(200).json(ticket);
+    // const ticket = await Tickets.find();
+    if (perfil === "estandar") {
+      const ticket = await Tickets.find({
+        estado: { $ne: "cancelado" },
+        usuario: idUsuario,
+      });
+      res.status(200).json(ticket);
+    } else if (perfil === "especial") {
+      const ticket = await Tickets.find({
+        estado: { $ne: "cancelado" },
+        dependencia: dependencia,
+      });
+      res.status(200).json(ticket);
+    } else {
+      const ticket = await Tickets.find({ estado: { $ne: "cancelado" } });
+      res.status(200).json(ticket);
+    }
   } catch (error) {
     return res.status(500).json({ msg: `Ha ocurrido un error`, error: error });
   }

@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config({ path: "variables.env" });
 
 module.exports = (req, res, next) => {
+  console.log('POST - AUTENTICACIÓN')
   const authHeader = req.get("Authorization");
 
   if (authHeader) {
@@ -15,9 +16,12 @@ module.exports = (req, res, next) => {
         const usuario = jwt.verify(token, process.env.SECRETA);
         req.usuario = usuario;
       } catch (error) {
-        console.log(error);
-        return res.status(403).json({ msg: "Acceso no autorizado, JWT no valido o Expirado." });
+        return res
+          .status(403)
+          .json({ msg: "Acceso no autorizado, JWT no valido o Expirado." });
       }
+    } else {
+      console.log("entre pro aca");
     }
   } else {
     return res.status(403).json({ msg: "Acceso no autorizado." });
