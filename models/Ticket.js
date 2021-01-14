@@ -36,7 +36,7 @@ const ticketsSchema = new Schema({
   dependencia: {
     //dependencia a la que se dirige el ticket
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Dependencias",
+    ref: "dependencias",
   },
   categoria: {
     type: mongoose.Schema.Types.ObjectId,
