@@ -30,6 +30,7 @@ const nuevoUsuario = async (req, res) => {
     res.json({ msg: "Usuario Creado Correctamente" });
   } catch (error) {
     console.log(error);
+     return res.status(500).json({ msg: `Ha ocurrido un error`, error: error });
   }
 };
 

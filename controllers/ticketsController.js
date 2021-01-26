@@ -8,12 +8,18 @@ const nuevoTicket = async (req, res) => {
   //***************MOSTRAR ERRORES DE VALIDACION***************
   const errores = validationResult(req);
   if (!errores.isEmpty()) {
-    return res.status(400).json({ errores: errores.array() });
+    console.log(errores);
+    return res.status(405).json({ errores: errores.array() });
   }
 
   //***************CREAR NUEVO TICKETS***************
+
   const nuevoTicket = req.body;
   nuevoTicket.usuario = req.usuario.id;
+
+  //consultar ultimo ticket
+  const ultimoTicket = await Tickets.findOne().sort({ field: "asc", _id: -1 }).limit(1)
+  nuevoTicket.codigo = ultimoTicket.codigo+1;
   ticket = new Tickets(nuevoTicket);
   try {
     await ticket.save();
@@ -47,17 +53,17 @@ const traerTickets = async (req, res) => {
       res.status(200).json(ticket);
     } else {
       //*****opcion 1 */
-      const ticket = await Tickets.find({ estado: { $ne: "cancelado" } }) 
-      .sort("-_id")
-      ;
-       res.status(200).json(ticket);
+      const ticket = await Tickets.find({ estado: { $ne: "cancelado" } }).sort(
+        "-_id"
+      );
+      res.status(200).json(ticket);
 
       //*****opcion 2 */
       // Tickets.find()
       //   .where("estado")
       //   .ne("cancelado")
       //   //.where('estado').equals('nuevo')
-      //   //.limite('2') 
+      //   //.limite('2')
       //   .sort("-_id")
       //   .exec(obtenerTickets);
 
@@ -72,52 +78,50 @@ const traerTickets = async (req, res) => {
 
       //*****opcion 3 */
 
-  //     Tickets.aggregate([
-  //     {
-  //       $lookup: {
-  //         from: 'dependencias',
-  //         as: 'dependencia',
-  //         localField: 'dependencia',
-  //         foreignField: '_id',
-  //         let: {dependencia: "$dependencia"},
-  //         pipeline: [
-  //           {$match: {$expr: {$eq: ['$dependencia', '$$dependencia']}}}
-  //         ]
-  //       }
-  //     },
-  //     {
-  //       $project: {
-  //         _id:1,
-  //         nombre: 1,
-  //         estado: 1,
-  //         codigo: 1,
-  //         titulo: 1,
-  //         descripcion: 1,
-  //         tipo:1,
-  //         usuario: 1,
-  //         categoria: 1,
-  //         prioridad: 1,
-  //         creacion: 1,
-  //         actualizacion: 1,
-  //         nombre: '$dependencias.nombre',
-          
-    
-  //       }
-  //     }
-  //   ]).exec( (err, result) => {
-  //     if(err){
-  //       return res
-  //            .status(500)
-  //              .json({ msg: `Ha ocurrido un error`, error: err });
-  //     }
-  //     if(result){
-  //       res.status(200).json(result);
-  //     }
+      //     Tickets.aggregate([
+      //     {
+      //       $lookup: {
+      //         from: 'dependencias',
+      //         as: 'dependencia',
+      //         localField: 'dependencia',
+      //         foreignField: '_id',
+      //         let: {dependencia: "$dependencia"},
+      //         pipeline: [
+      //           {$match: {$expr: {$eq: ['$dependencia', '$$dependencia']}}}
+      //         ]
+      //       }
+      //     },
+      //     {
+      //       $project: {
+      //         _id:1,
+      //         nombre: 1,
+      //         estado: 1,
+      //         codigo: 1,
+      //         titulo: 1,
+      //         descripcion: 1,
+      //         tipo:1,
+      //         usuario: 1,
+      //         categoria: 1,
+      //         prioridad: 1,
+      //         creacion: 1,
+      //         actualizacion: 1,
+      //         nombre: '$dependencias.nombre',
 
-  //   })
-    
-  }}
-   catch (error) {
+      //       }
+      //     }
+      //   ]).exec( (err, result) => {
+      //     if(err){
+      //       return res
+      //            .status(500)
+      //              .json({ msg: `Ha ocurrido un error`, error: err });
+      //     }
+      //     if(result){
+      //       res.status(200).json(result);
+      //     }
+
+      //   })
+    }
+  } catch (error) {
     return res.status(500).json({ msg: `Ha ocurrido un error`, error: error });
   }
 };
@@ -222,6 +226,16 @@ const eliminarTicket = (req, res) => {
     return res.status(500).json({ msg: "Ha ocurrido un error", error: error });
   }
 };
+
+// const ultimoTicket = async () => {
+//   try {
+//     const ultimo = await Tickets.find().sort({ $codigo: -1 }).limit(1);
+//     console.log(ultimo);
+//   } catch (error) {
+//     console.log(error);
+//     return;
+//   }
+// };
 
 module.exports = {
   nuevoTicket,

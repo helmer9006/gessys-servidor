@@ -10,7 +10,7 @@ router.post(
   auth,
   [
     check("titulo", "El Nombre es Obligatorio").not().isEmpty(),
-    check("codigo", "El area es Obligatoria").not().isEmpty(),
+    //check("codigo", "El area es Obligatoria").not().isEmpty(),
     check("descripcion", "El area es Obligatoria").not().isEmpty(),
     check("tipo", "El tipo es Obligatorio").not().isEmpty(),
     check("dependencia", "La dependencia es Obligatoria").not().isEmpty(),

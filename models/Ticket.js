@@ -4,10 +4,11 @@ const Schema = mongoose.Schema;
 const ticketsSchema = new Schema({
   codigo: {
     //codigo para identificar el ticket, tres inicial de la dependencia a quien se solicita seguido de numero autoincremental
-    type: String,
-    required: true,
+    type: Number,
+    //required: true,
     unique: true,
     trim: true,
+    default: 1,
   },
   titulo: {
     //descripcion corta de la solicitud
@@ -19,7 +20,7 @@ const ticketsSchema = new Schema({
   descripcion: {
     //descripcion general o amplia de la solicitud
     type: String,
-    required: true,
+    // required: true,
     lowercase: true,
     trim: true,
   },
