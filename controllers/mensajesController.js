@@ -11,20 +11,22 @@ const NuevoMensaje = async (req, res) => {
     return res.status(400).json({ errores: errores.array() });
   }
 
+  const {id:idUsuario, perfil} = req.usuario
+
   //***************CREAR NUEVO MENSAJE***************
   mensaje = new Mensajes(req.body);
-  console.log("usuario autenticado ", req.usuario);
-  try {
-    await mensaje.save();
-    res.json({ msg: "Mensaje Creado Correctamente" });
-    console.log(
-      "ultimo mensaje creado",
-      coleccion.Find().SetSortOrder(SortBy.Descending("_id")).SetLimit(1)
-    );
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json({ msg: `Ha ocurrido un error`, error: error });
-  }
+  mensaje.usuario = idUsuario
+    try {
+      await mensaje.save();
+      res.json({ msg: "Mensaje Creado Correctamente." });
+      console.log(
+        "ultimo mensaje creado",
+        coleccion.Find().SetSortOrder(SortBy.Descending("_id")).SetLimit(1)
+      );
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ msg: `Ha ocurrido un error`, error: error });
+    }
 };
 
 // //***************TRAER MENSAJES POR TICKET***************

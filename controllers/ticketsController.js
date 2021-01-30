@@ -20,6 +20,7 @@ const nuevoTicket = async (req, res) => {
 
   //consultar ultimo ticket
   const ultimoTicket = await Tickets.findOne().sort({ field: "asc", _id: -1 }).limit(1)
+
   nuevoTicket.codigo = ultimoTicket.codigo+1;
   ticket = new Tickets(nuevoTicket);
   try {
