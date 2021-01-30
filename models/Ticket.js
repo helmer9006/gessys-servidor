@@ -31,16 +31,16 @@ const ticketsSchema = new Schema({
     trim: true,
   },
   usuario: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: "Usuarios",
   },
   dependencia: {
     //dependencia a la que se dirige el ticket
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "dependencias",
+    type: Schema.Types.ObjectId,
+    ref: "Dependencias",
   },
   categoria: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: "Categorias",
   },
   prioridad: {

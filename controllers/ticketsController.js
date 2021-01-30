@@ -1,5 +1,6 @@
 const Tickets = require("../models/Ticket");
 const { validationResult, body } = require("express-validator");
+const { populate } = require("../models/Ticket");
 
 //***************CREAR NUEVO TICKET***************
 const nuevoTicket = async (req, res) => {
@@ -37,25 +38,49 @@ const traerTickets = async (req, res) => {
   const idUsuario = req.usuario.id;
 
   try {
+
+    // Tickets.find({
+    //       estado: { $ne: "cancelado" },
+    //       usuario: idUsuario})
+    //       .populate('dependencia')
+    //       .exec()
+    //       , function(err, tickets){
+    //         if(tickets!= null){
+    //           res.status(200).json(ticket);
+    //         }
+    //       }
+
+
+
     // const ticket = await Tickets.find();
     if (perfil === "estandar") {
       const ticket = await Tickets.find({
         estado: { $ne: "cancelado" },
-
         usuario: idUsuario,
-      });
+      })
+      .populate('dependencia')
+      .populate('usuario')
+      .populate('categoria')
+      .sort("-_id")
       res.status(200).json(ticket);
     } else if (perfil === "especial") {
       const ticket = await Tickets.find({
         estado: { $ne: "cancelado" },
         dependencia: dependencia,
-      });
+      })
+      .populate('dependencia')
+      .populate('usuario')
+      .populate('categoria')
+      .sort("-_id")
       res.status(200).json(ticket);
     } else {
       //*****opcion 1 */
-      const ticket = await Tickets.find({ estado: { $ne: "cancelado" } }).sort(
-        "-_id"
-      );
+      const ticket = await Tickets.find({ estado: { $ne: "cancelado" } })
+      
+      .populate('dependencia')
+        .populate('usuario')
+      .populate('categoria')
+      .sort("-_id")
       res.status(200).json(ticket);
 
       //*****opcion 2 */
@@ -64,6 +89,9 @@ const traerTickets = async (req, res) => {
       //   .ne("cancelado")
       //   //.where('estado').equals('nuevo')
       //   //.limite('2')
+      //   .populate('dependencia')
+      //   // .populate('usuario')
+      //   // .populate('categoria')
       //   .sort("-_id")
       //   .exec(obtenerTickets);
 
@@ -120,7 +148,7 @@ const traerTickets = async (req, res) => {
       //     }
 
       //   })
-    }
+     }
   } catch (error) {
     return res.status(500).json({ msg: `Ha ocurrido un error`, error: error });
   }
