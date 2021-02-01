@@ -9,14 +9,14 @@ router.post(
   "/",
   auth,
   [
-    check("descripcion", "El Nombre es Obligatorio").not().isEmpty(),
-    check("usuario", "El area es Obligatoria").not().isEmpty(),
-    check("ticket", "El area es Obligatoria").not().isEmpty(),
+    check("descripcion", "El Mensaje es Obligatorio").not().isEmpty(),
+    check("ticket", "El Ticket es Obligatoria").not().isEmpty(),
   ],
-  mensajesController.NuevoMensaje
+  mensajesController.crearMensaje
 );
 
 //TRAER MENSAJE POR TICKET
 
+router.get("/:idTicket", auth, mensajesController.traerMensajesPorTicket);
 
 module.exports = router;

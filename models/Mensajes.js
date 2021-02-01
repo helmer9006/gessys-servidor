@@ -5,16 +5,15 @@ const mensajesSchema = new Schema({
   descripcion: {
     type: String,
     required: true,
-    unique: true,
     lowercase: true,
     trim: true,
   },
   usuario: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: "Usuarios",
   },
   ticket: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: "Tickets",
   },
   creacion: {

@@ -23,7 +23,7 @@ const usuariosSchema = new Schema({
     required: true,
     trim: true,
   },
-  //administrador, estandar, gestor
+  //administrador, especial(los que dan soporte como mantenimiento), estandar(realizan solicitudes de tickets), empleado(para asignarle equipos)
   perfil: {
     type: String,
     required: true,

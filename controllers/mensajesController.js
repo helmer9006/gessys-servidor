@@ -2,7 +2,7 @@ const Mensajes = require("../models/Mensajes");
 const { validationResult, body } = require("express-validator");
 
 //***************CREAR NUEVO MENSAJE***************
-const NuevoMensaje = async (req, res) => {
+const crearMensaje = async (req, res) => {
   console.log("POST - CREAR NUEVA CATEGORIA ");
 
   //***************MOSTRAR ERRORES DE VALIDACION***************
@@ -11,37 +11,40 @@ const NuevoMensaje = async (req, res) => {
     return res.status(400).json({ errores: errores.array() });
   }
 
-  const {id:idUsuario, perfil} = req.usuario
+  const { id: idUsuario, perfil } = req.usuario;
 
   //***************CREAR NUEVO MENSAJE***************
   mensaje = new Mensajes(req.body);
-  mensaje.usuario = idUsuario
-    try {
-      await mensaje.save();
-      res.json({ msg: "Mensaje Creado Correctamente." });
-      console.log(
-        "ultimo mensaje creado",
-        coleccion.Find().SetSortOrder(SortBy.Descending("_id")).SetLimit(1)
-      );
-    } catch (error) {
-      console.log(error);
-      return res.status(500).json({ msg: `Ha ocurrido un error`, error: error });
-    }
+  mensaje.usuario = idUsuario;
+  console.log(mensaje);
+  try {
+    await mensaje.save();
+    res.json({ msg: "Mensaje Creado Correctamente." });
+    console.log(
+      "ultimo mensaje creado",
+      coleccion.Find().SetSortOrder(SortBy.Descending("_id")).SetLimit(1)
+    );
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ msg: `Ha ocurrido un error`, error: error });
+  }
 };
 
 // //***************TRAER MENSAJES POR TICKET***************
-// const traerMensajesPorTicket = async (req, res) => {
-//   const ticket = req.params.ticket;
-
-//   console.log("GET - TRAER TICKETS POR ESTADO ");
-//   try {
-//     const ticket = await Tickets.find({ estado: estado });
-//     res.status(200).json(ticket);
-//   } catch (error) {
-//     return res.status(500).json({ msg: `Ha ocurrido un error`, error: error });
-//   }
-// };
+const traerMensajesPorTicket = async (req, res) => {
+  const idTicket = req.params.idTicket;
+  console.log("GET - TRAER MENSAJES POR TICKETS ");
+  try {
+    const mensajes = await Mensajes.find({ ticket: idTicket })
+      .populate("usuario")
+      .sort("_id");
+    res.status(200).json(mensajes);
+  } catch (error) {
+    return res.status(500).json({ msg: `Ha ocurrido un error`, error: error });
+  }
+};
 
 module.exports = {
-  NuevoMensaje
-}
+  crearMensaje,
+  traerMensajesPorTicket,
+};
