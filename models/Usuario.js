@@ -15,9 +15,10 @@ const usuariosSchema = new Schema({
     trim: false,
   },
   identificacion: {
-   type: Number,
+   type: String,
    required: true,
-   trim: false
+   trim: false,
+   unique: true,
   },
   nombre: {
     type: String,

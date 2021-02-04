@@ -7,6 +7,8 @@ const auth = require("../middleware/auth");
 router.post('/', auth,
     [
         check('nombre', 'El Nombre es Obligatorio').not().isEmpty(),
+        check('tipoIdentificacion', 'El tipo de identificacion es Obligatorio').not().isEmpty(),
+        check('identificacion', 'El número de identificacion es Obligatorio').not().isEmpty(),
         check('email', 'Agrega un email válido').isEmail(),
         check('perfil', 'El perfil es Obligatorio').not().isEmpty(),
         check('dependencia', 'La dependencia es Obligatorio').not().isEmpty(),

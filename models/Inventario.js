@@ -1,66 +1,61 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const inventariosSchema = new Schema({
+const inventarioSchema = new Schema({
   codigo: {
-    //codigo para identificar el ticket, tres inicial de la dependencia a quien se solicita seguido de numero autoincremental
-    type: Number,
-    //required: true,
+    //codigo para identificar el equipo, accesorio u herramienta, tres inicial de la categoria relacionada seguido de numero incremental de 4 digitos ejemplo: TEL-0001
+    type: String,
+    required: true,
     unique: true,
     trim: true,
     default: 1,
   },
-  titulo: {
-    //descripcion corta de la solicitud
+  marca: {
+    //marca del equipo u accesorio
     type: String,
-    required: true,
     uppercase: true,
     trim: true,
   },
-  descripcion: {
-    //descripcion general o amplia de la solicitud
+  modelo: {
+    //modelo del equipo y accesorio
     type: String,
-    // required: true,
     lowercase: true,
     trim: true,
   },
-  tipo: {
-    type: String,
-    required: true,
-    lowercase: true,
-    trim: true,
-  },
-  usuario: {
+  responsable: {
+    //usuario responsable(diccionario usuarios)
     type: Schema.Types.ObjectId,
     ref: "Usuarios",
   },
+  piso: {
+    type: String,
+    lowercase: true,
+    trim: true,
+  },
   dependencia: {
-    //dependencia a la que se dirige el ticket
+    //dependencia que crea el ticket
     type: Schema.Types.ObjectId,
     ref: "Dependencias",
   },
   categoria: {
+    //categoria a la que pertenece el equipo y accesorio
     type: Schema.Types.ObjectId,
     ref: "Categorias",
   },
-  prioridad: {
-    //alta, media, baja
+  proveedor: {
+    //proveedor o empresa que vende equipo
+    type: Schema.Types.ObjectId,
+    ref: "Proveedores",
+  },
+  observacion: {
     type: String,
-    required: true,
+    lowercase: true,
     trim: true,
   },
-  estado: { // nuevo, proceso, resuelto, cancelado
-    type: String,
-    required: true,
-    trim: true,
-    default: 'nuevo'
+  anexo: string, //archivo pdf o word de factura u otro documento
+  fechaFactura: {
+    type: Date,
   },
-  mensaje: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Mensajes",
-    },
-  ],
   creacion: {
     type: Date,
     default: Date.now,
@@ -70,4 +65,5 @@ const inventariosSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model("Inventario", ticketsSchema);
+module.exports = mongoose.model("Inventario", inventarioSchema);
+

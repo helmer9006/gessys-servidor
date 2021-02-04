@@ -10,10 +10,11 @@ const nuevoUsuario = async (req, res) => {
   }
 
   // Verificar si el usuario ya estuvo registrado
-  const { email, password } = req.body;
+  const { email, password, identificacion } = req.body;
 
-  let usuario = await Usuario.findOne({ email });
+  //validar que el usuario no esté creado previamente
 
+  let usuario = await Usuario.findOne({ $or: [{ email }, { identificacion }] });
   if (usuario) {
     return res.status(400).json({ msg: "El usuario ya esta registrado" });
   }
@@ -29,21 +30,20 @@ const nuevoUsuario = async (req, res) => {
     await usuario.save();
     res.json({ msg: "Usuario Creado Correctamente" });
   } catch (error) {
-    console.log(error);
-     return res.status(500).json({ msg: `Ha ocurrido un error`, error: error });
+    return res.status(500).json({ msg: `Ha ocurrido un error`, error: error });
   }
 };
 
 const traerUsuario = async (req, res) => {
   try {
     const usuarios = await Usuario.find({});
-    res.status(200).json(usuarios)
+    res.status(200).json(usuarios);
   } catch (error) {
-    return res.status(500).json({ msg: `Ha ocurrido un error, ${error} `});
+    return res.status(500).json({ msg: `Ha ocurrido un error, ${error} ` });
   }
 };
 
 module.exports = {
   nuevoUsuario,
-  traerUsuario
+  traerUsuario,
 };

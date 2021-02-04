@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const ticketsSchema = new Schema({
   codigo: {
-    //codigo para identificar el ticket, tres inicial de la dependencia a quien se solicita seguido de numero autoincremental
+    //codigo para identificar el ticket
     type: Number,
     //required: true,
     unique: true,
