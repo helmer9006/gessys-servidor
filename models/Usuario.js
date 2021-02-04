@@ -9,6 +9,16 @@ const usuariosSchema = new Schema({
     lowercase: true,
     trim: true,
   },
+  tipoIdentificacion: {
+    type: String,
+    required: true,
+    trim: false,
+  },
+  identificacion: {
+   type: Number,
+   required: true,
+   trim: false
+  },
   nombre: {
     type: String,
     required: true,
