@@ -55,6 +55,10 @@ const inventarioSchema = new Schema({
   anexo: string, //archivo pdf o word de factura u otro documento
   fechaFactura: {
     type: Date,
+  }, usuario: {
+    //usuario que realiza el registro(diccionario usuarios)
+    type: Schema.Types.ObjectId,
+    ref: "Usuarios",
   },
   creacion: {
     type: Date,
