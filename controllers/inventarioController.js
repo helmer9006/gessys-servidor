@@ -1,6 +1,5 @@
 const Inventario = require("../models/Inventario");
 const { validationResult, body } = require("express-validator");
-const { populate } = require("../models/Inventario");
 
 //***************CREAR NUEVO INVENTARIO***************
 const nuevoInventario = async (req, res) => {
@@ -29,69 +28,53 @@ const nuevoInventario = async (req, res) => {
   }
 };
 
-
 //****************TRAER ULTIMO REGISTRO DE INVENTARIO CREADO***********/
 
-const ultimoRegistroInventario = (req, res) => {
-
+const ultimoRegistroInventario = async (req, res) => {
   try {
     const reg = await Inventario.findOne()
-    .sort({ field: "asc", _id: -1 })
-    .limit(1);
+      .sort({ field: "asc", _id: -1 })
+      .limit(1);
     res.status(200).json(reg);
   } catch (error) {
-    console.log(error)
+    console.log(error);
     return res.status(500).json({ msg: `Ha ocurrido un error`, error: error });
   }
-} 
-
+};
 
 //#region
 // //***************TRAER TODOS LOS INVENTARIO***************
-// const traerTickets = async (req, res) => {
-//   console.log("GET - TRAER TODOS LOS TICKETS ");
-//   const perfil = req.usuario.perfil;
-//   const dependencia = req.usuario.dependencia;
-//   const idUsuario = req.usuario.id;
+const traerInventario = async (req, res) => {
+  console.log("GET - TRAER TODOS LOS REGISTROS DE INVENTARIO ");
+  const { perfil, dependencia, id:idUsuario } = req.usuario;
 
-//   try {
-
-//     // const ticket = await Tickets.find();
-//     if (perfil === "estandar") {
-//       const ticket = await Inventario.find({
-//         estado: { $ne: "cancelado" },
-//         usuario: idUsuario,
-//       })
-//       .populate('dependencia')
-//       .populate('usuario')
-//       .populate('categoria')
-//       .sort("-_id")
-//       res.status(200).json(ticket);
-//     } else if (perfil === "especial") {
-//       const ticket = await Inventario.find({
-//         estado: { $ne: "cancelado" },
-//         dependencia: dependencia,
-//       })
-//       .populate('dependencia')
-//       .populate('usuario')
-//       .populate('categoria')
-//       .sort("-_id")
-//       res.status(200).json(ticket);
-//     } else {
-//       //*****opcion 1 */
-//       const ticket = await Inventario.find({ estado: { $ne: "cancelado" } })
-
-//       .populate('dependencia')
-//         .populate('usuario')
-//       .populate('categoria')
-//       .sort("-_id")
-//       res.status(200).json(ticket);
-
-//      }
-//   } catch (error) {
-//     return res.status(500).json({ msg: `Ha ocurrido un error`, error: error });
-//   }
-// };
+  try {
+    // const invenario = await Inventario.find();
+    if (perfil === "especial") {
+      const inventario = await Inventario.find({ dependencia: dependencia })
+        .populate("dependencia")
+        .populate("categoria")
+        .populate("usuario")
+        .populate("responsable")
+        .populate("Proveedores")
+        .sort("-_id");
+      res.status(200).json(inventario);
+    } else if (perfil === "administrador") {
+      const inventario = await Inventario.find({})
+        .populate("dependencia")
+        .populate("categoria")
+        .populate("usuario")
+        .populate("responsable")
+        .populate("proveedor")
+        .sort("-_id");
+      res.status(200).json(inventario);
+    } else {
+      return res.status(403).json({ msg: `Acceso no autorizado` });
+    }
+  } catch (error) {
+    return res.status(500).json({ msg: `Ha ocurrido un error`, error: error });
+  }
+};
 
 // //***************TRAER INVENTARIO POR ESTADO***************
 // const traerTicketsPorEstado = async (req, res) => {
@@ -207,8 +190,9 @@ const ultimoRegistroInventario = (req, res) => {
 //#endregion
 
 module.exports = {
-  nuevoInventario: nuevoInventario,
-  ultimoRegistroInventario
+  nuevoInventario,
+  ultimoRegistroInventario,
+  traerInventario,
   // traerTickets,
   // traerTicketsPorEstado,
   // actualizarEstadoPorId,

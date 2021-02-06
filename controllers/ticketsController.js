@@ -1,6 +1,5 @@
 const Tickets = require("../models/Ticket");
 const { validationResult, body } = require("express-validator");
-const { populate } = require("../models/Ticket");
 
 //***************CREAR NUEVO TICKET***************
 const nuevoTicket = async (req, res) => {
@@ -19,9 +18,11 @@ const nuevoTicket = async (req, res) => {
   nuevoTicket.usuario = req.usuario.id;
 
   //consultar ultimo ticket
-  const ultimoTicket = await Tickets.findOne().sort({ field: "asc", _id: -1 }).limit(1)
+  const ultimoTicket = await Tickets.findOne()
+    .sort({ field: "asc", _id: -1 })
+    .limit(1);
 
-  nuevoTicket.codigo = ultimoTicket.codigo+1;
+  nuevoTicket.codigo = ultimoTicket.codigo + 1;
   ticket = new Tickets(nuevoTicket);
   try {
     await ticket.save();
@@ -39,7 +40,6 @@ const traerTickets = async (req, res) => {
   const idUsuario = req.usuario.id;
 
   try {
-
     // Tickets.find({
     //       estado: { $ne: "cancelado" },
     //       usuario: idUsuario})
@@ -51,37 +51,35 @@ const traerTickets = async (req, res) => {
     //         }
     //       }
 
-
-
     // const ticket = await Tickets.find();
     if (perfil === "estandar") {
       const ticket = await Tickets.find({
         estado: { $ne: "cancelado" },
         usuario: idUsuario,
       })
-      .populate('dependencia')
-      .populate('usuario')
-      .populate('categoria')
-      .sort("-_id")
+        .populate("dependencia")
+        .populate("usuario")
+        .populate("categoria")
+        .sort("-_id");
       res.status(200).json(ticket);
     } else if (perfil === "especial") {
       const ticket = await Tickets.find({
         estado: { $ne: "cancelado" },
         dependencia: dependencia,
       })
-      .populate('dependencia')
-      .populate('usuario')
-      .populate('categoria')
-      .sort("-_id")
+        .populate("dependencia")
+        .populate("usuario")
+        .populate("categoria")
+        .sort("-_id");
       res.status(200).json(ticket);
-    } else {
+    } else if (perfil === "administrador") {
       //*****opcion 1 */
       const ticket = await Tickets.find({ estado: { $ne: "cancelado" } })
-      
-      .populate('dependencia')
-        .populate('usuario')
-      .populate('categoria')
-      .sort("-_id")
+
+        .populate("dependencia")
+        .populate("usuario")
+        .populate("categoria")
+        .sort("-_id");
       res.status(200).json(ticket);
 
       //*****opcion 2 */
@@ -149,7 +147,9 @@ const traerTickets = async (req, res) => {
       //     }
 
       //   })
-     }
+    } else {
+      return res.status(403).json({ msg: `Acceso no autorizado` });
+    }
   } catch (error) {
     return res.status(500).json({ msg: `Ha ocurrido un error`, error: error });
   }

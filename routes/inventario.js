@@ -9,19 +9,18 @@ router.post(
   "/",
   auth,
   [
-    check("titulo", "El Nombre es Obligatorio").not().isEmpty(),
-    //check("codigo", "El area es Obligatoria").not().isEmpty(),
-    check("descripcion", "El area es Obligatoria").not().isEmpty(),
-    check("tipo", "El tipo es Obligatorio").not().isEmpty(),
-    check("dependencia", "La dependencia es Obligatoria").not().isEmpty(),
+    check("codigo", "El codigo es Obligatorio").not().isEmpty(),
+    check("piso", "El piso es Obligatorio").not().isEmpty(),
     check("categoria", "La categoria es Obligatoria").not().isEmpty(),
-    check("prioridad", "La prioridad es Obligatoria").not().isEmpty(),
+    check("proveedor", "El proveedor es Obligatorio").not().isEmpty(),
+    check("fechaFactura", "La fecha de la factura es Obligatoria").not().isEmpty(),
+    check("responsable", "El responsable es Obligatorio").not().isEmpty(),
   ],
-  inventarioController.nuevoTicket
+  inventarioController.nuevoInventario
 );
 
-// //TRAER TODOS LOS INVENTARIO
-// router.get("/", auth, inventarioController.traerTickets);
+//TRAER TODOS LOS INVENTARIO
+ router.get("/", auth, inventarioController.traerInventario);
 
 // //TRAER INVENTARIO POR ESTADO
 // router.get("/:estado", auth, inventarioController.traerTicketsPorEstado);

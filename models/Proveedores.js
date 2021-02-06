@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const proveedoressSchema = new Schema({
+const proveedoresSchema = new Schema({
   nombre: {
     type: String,
     required: true,
@@ -45,7 +45,11 @@ const proveedoressSchema = new Schema({
     required: true,
     trim: false,
   },
-
+  usuario: {
+    //usauiro que realiza registro
+    type: Schema.Types.ObjectId,
+    ref: "Usuarios",
+  },
   creacion: {
     type: Date,
     default: Date.now,

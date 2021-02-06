@@ -11,13 +11,19 @@ const inventarioSchema = new Schema({
     default: 1,
   },
   marca: {
-    //marca del equipo u accesorio
+    //marca del equipo o accesorio
     type: String,
     uppercase: true,
     trim: true,
   },
   modelo: {
-    //modelo del equipo y accesorio
+    //modelo del equipo o accesorio
+    type: String,
+    lowercase: true,
+    trim: true,
+  },
+  serial: {
+    //Serial del equipo o accesorio
     type: String,
     lowercase: true,
     trim: true,
@@ -52,10 +58,12 @@ const inventarioSchema = new Schema({
     lowercase: true,
     trim: true,
   },
-  anexo: string, //archivo pdf o word de factura u otro documento
+  //archivo pdf o word de factura u otro documento
+  anexo: { type: String, },
   fechaFactura: {
     type: Date,
-  }, usuario: {
+  },
+  usuario: {
     //usuario que realiza el registro(diccionario usuarios)
     type: Schema.Types.ObjectId,
     ref: "Usuarios",
@@ -70,4 +78,3 @@ const inventarioSchema = new Schema({
 });
 
 module.exports = mongoose.model("Inventario", inventarioSchema);
-
