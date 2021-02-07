@@ -83,7 +83,7 @@ const eliminarDependencia = (req, res) => {
             .json({ msg: `No existe la dependencia a eliminar ` });
         return res
           .status(200)
-          .json({ msg: `Dependencia eliminada correctamente`, area: doc });
+          .json({ msg: `Dependencia eliminada correctamente`, dependencia: doc });
       }
     });
   } catch (error) {

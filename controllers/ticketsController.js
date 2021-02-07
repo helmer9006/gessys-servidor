@@ -248,7 +248,7 @@ const eliminarTicket = (req, res) => {
             .json({ msg: `No existe el ticket a eliminar ` });
         return res
           .status(200)
-          .json({ msg: `Ticket eliminado correctamente`, area: doc });
+          .json({ msg: `Ticket eliminado correctamente`, regitro: doc });
       }
     });
   } catch (error) {

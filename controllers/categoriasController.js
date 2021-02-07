@@ -82,7 +82,7 @@ const eliminarCategoria = (req, res) => {
             .json({ msg: `No existe la categoria a eliminar ` });
         return res
           .status(200)
-          .json({ msg: `categoria eliminada correctamente`, area: doc });
+          .json({ msg: `categoria eliminada correctamente`, categoria: doc });
       }
     });
   } catch (error) {

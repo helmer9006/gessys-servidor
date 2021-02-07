@@ -4,7 +4,10 @@ const inventarioController = require("../controllers/inventarioController");
 const { check } = require("express-validator");
 const auth = require("../middleware/auth");
 
-//CREAR NUEVO INVENTARIO
+
+/*--------------------------------------------------
+              CREAR NUEVO INVENTARIO
+---------------------------------------------------*/
 router.post(
   "/",
   auth,
@@ -19,20 +22,26 @@ router.post(
   inventarioController.nuevoInventario
 );
 
-//TRAER TODOS LOS INVENTARIO
+/*--------------------------------------------------
+            TRAER TODOS LOS INVENTARIO
+ ---------------------------------------------------*/
  router.get("/", auth, inventarioController.traerInventario);
 
-// //TRAER INVENTARIO POR ESTADO
-// router.get("/:estado", auth, inventarioController.traerTicketsPorEstado);
 
-// //ACTUALIZAR ESTADO DE INVENTARIO POR ID
-// router.put("/:idTicket/:estado", auth, inventarioController.actualizarEstadoPorId);
+ /*--------------------------------------------------
+          TRAER ULTIMO REGISTRO DE INVENTARIO
+ ---------------------------------------------------*/
+ router.get("/:idCategoria", auth, inventarioController.ultimoRegistroInventario);
 
-// //ACTUALIZAR INVENTARIO POR ID
-// router.put("/", auth, inventarioController.actualizarTicket);
+ /*--------------------------------------------------
+        ACTUALIZAR REGISTRO DE INVENTARIO POR ID
+ ---------------------------------------------------*/
+router.put("/", auth, inventarioController.actualizarInventario);
 
-// //ELIMINAR TICKET
-// router.delete("/:idTicket", auth, inventarioController.eliminarTicket);
+ /*--------------------------------------------------
+        ELIMINAR REGISTRO DE INVENTARIO POR ID
+ ---------------------------------------------------*/
+ router.delete("/:idInventario", auth, inventarioController.eliminarInventario);
 
 
 module.exports = router;

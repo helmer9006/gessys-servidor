@@ -58,8 +58,27 @@ const inventarioSchema = new Schema({
     lowercase: true,
     trim: true,
   },
+  nuevosCampos: [
+    {
+      clave: {
+        type: String,
+        lowercase: true,
+        trim: true,
+      },
+      valor: {
+        type: String,
+        lowercase: true,
+        trim: true,
+      },
+      tipoCampo: {
+        type: String,
+        lowercase: true,
+        trim: true,
+      },
+    },
+  ],
   //archivo pdf o word de factura u otro documento
-  anexo: { type: String, },
+  anexo: { type: String },
   fechaFactura: {
     type: Date,
   },
