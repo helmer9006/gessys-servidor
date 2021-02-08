@@ -18,8 +18,7 @@ const categoriasSchema = new Schema({
     default: Date.now,
   },
   actualizacion: {
-    type: Date,
-    default: Date.now,
+    type: Date
   },
 });
 

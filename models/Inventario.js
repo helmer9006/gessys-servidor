@@ -32,6 +32,7 @@ const inventarioSchema = new Schema({
     //usuario responsable(diccionario usuarios)
     type: Schema.Types.ObjectId,
     ref: "Usuarios",
+    require: true,
   },
   piso: {
     type: String,
@@ -42,16 +43,19 @@ const inventarioSchema = new Schema({
     //dependencia que crea el ticket
     type: Schema.Types.ObjectId,
     ref: "Dependencias",
+    require: true,
   },
   categoria: {
     //categoria a la que pertenece el equipo y accesorio
     type: Schema.Types.ObjectId,
     ref: "Categorias",
+    require: true,
   },
   proveedor: {
     //proveedor o empresa que vende equipo
     type: Schema.Types.ObjectId,
     ref: "Proveedores",
+    require: true,
   },
   observacion: {
     type: String,
@@ -59,6 +63,7 @@ const inventarioSchema = new Schema({
     trim: true,
   },
   nuevosCampos: [
+    //objeto con nombre y valor del nuevo campo
     {
       clave: {
         type: String,
@@ -72,7 +77,6 @@ const inventarioSchema = new Schema({
       },
       tipoCampo: {
         type: String,
-        lowercase: true,
         trim: true,
       },
     },
@@ -81,6 +85,7 @@ const inventarioSchema = new Schema({
   anexo: { type: String },
   fechaFactura: {
     type: Date,
+    require: true,
   },
   usuario: {
     //usuario que realiza el registro(diccionario usuarios)
