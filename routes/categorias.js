@@ -10,7 +10,7 @@ router.post(
   auth,
   [
     check("nombre", "El Nombre es Obligatorio").not().isEmpty(),
-    check("dependencia", "El area es Obligatoria").not().isEmpty(),
+    check("dependencia", "La dependencia es Obligatoria").not().isEmpty(),
   ],
   categoriasController.nuevaCategoria
 );

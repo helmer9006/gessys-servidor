@@ -51,6 +51,12 @@ const inventarioSchema = new Schema({
     ref: "Categorias",
     require: true,
   },
+  tipoInventario: {
+    //tipo de inventario(portatil o all in one, etc)
+    type: Schema.Types.ObjectId,
+    ref: "TipoInventario",
+    require: true,
+  },
   proveedor: {
     //proveedor o empresa que vende equipo
     type: Schema.Types.ObjectId,

@@ -89,6 +89,7 @@ const traerInventario = async (req, res) => {
         .populate("usuario")
         .populate("responsable")
         .populate("proveedor")
+        .populate("tipoInventario")
         .sort("-_id");
       res.status(200).json(inventario);
     } else {
