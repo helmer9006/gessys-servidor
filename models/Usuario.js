@@ -25,6 +25,10 @@ const usuariosSchema = new Schema({
     required: true,
     trim: true,
   },
+  foto: {
+    type: String,
+    trim: true,
+  },
   dependencia: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Dependencias",
