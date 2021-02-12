@@ -1,4 +1,5 @@
 const Inventario = require("../models/Inventario");
+const NuevosCampos = require("../models/NuevosCampos");
 const { validationResult, body } = require("express-validator");
 
 //#region CREAR
@@ -21,9 +22,10 @@ const nuevoInventario = async (req, res) => {
 
   const nuevoInventario = req.body;
   nuevoInventario.usuario = idusuario;
-  nuevoInventario.dependencia = dependencia;
-
-
+  const { nuevosCampos, categoria } = req.body;
+  const result = await validarNuevosCampos(nuevosCampos, categoria);
+  console.log(result);
+  return;
   inventario = new Inventario(nuevoInventario);
   if (perfil === "especial" || perfil === "administrador") {
     try {
@@ -51,7 +53,9 @@ const ultimoRegistroInventario = async (req, res) => {
   console.log("POST - TRAER ULTIMO REGISTRO DE INVENTARIO POR CATEGORIA");
   try {
     const categoria = req.params.idCategoria;
-    const reg = await Inventario.findOne({ categoria: categoria }).limit(1);
+    const reg = await Inventario.findOne({}, { codigo: 1 })
+      .sort({ field: "asc", _id: -1 })
+      .limit(1);
     res.status(200).json(reg);
   } catch (error) {
     console.log(error);
@@ -186,6 +190,18 @@ const eliminarInventario = (req, res) => {
   } else {
     return res.status(403).json({ msg: `Acceso no autorizado` });
   }
+};
+
+const validarNuevosCampos = async (nuevosCampos, categoria) => {
+  const campos = await NuevosCampos.find({ categoria: categoria }).sort("-_id");
+console.log(categoria)
+  campos.forEach((element) => {
+    nuevosCampos.forEach((index) => {
+      if (element.clave !== index.clave) {
+        return 'true';
+      }
+    });
+  });
 };
 
 //#endregion
