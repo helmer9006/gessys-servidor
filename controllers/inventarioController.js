@@ -23,9 +23,7 @@ const nuevoInventario = async (req, res) => {
   const nuevoInventario = req.body;
   nuevoInventario.usuario = idusuario;
   const { nuevosCampos, categoria } = req.body;
-  const result = await validarNuevosCampos(nuevosCampos, categoria);
-  console.log(result);
-  return;
+  guardarNuevosCampos(nuevosCampos, categoria);
   inventario = new Inventario(nuevoInventario);
   if (perfil === "especial" || perfil === "administrador") {
     try {
@@ -192,16 +190,35 @@ const eliminarInventario = (req, res) => {
   }
 };
 
-const validarNuevosCampos = async (nuevosCampos, categoria) => {
+const guardarNuevosCampos = async (nuevosCampos, categoria) => {
   const campos = await NuevosCampos.find({ categoria: categoria }).sort("-_id");
-console.log(categoria)
-  campos.forEach((element) => {
-    nuevosCampos.forEach((index) => {
-      if (element.clave !== index.clave) {
-        return 'true';
+  const diferente = [];
+
+  nuevosCampos.map((item) => {
+    let isdiferente = false;
+    campos.map((elemento) => {
+      if (elemento.clave === item.clave) {
+        isdiferente = true;
       }
     });
+    if (!isdiferente) {
+      diferente.push(item);
+    }
   });
+  //si existen campos diferentes guardardos en diccionarios nuevosCampos
+  if (diferente.length > 0) {
+    diferente.map(async (element) => {
+      console.log("POST - CREAR NUEVOS CAMPOS ");
+      element.categoria = categoria;
+      registro = new NuevosCampos(element);
+      try {
+        await registro.save();
+      } catch (error) {
+        console.log(error);
+        return { msg: `Ha ocurrido un error`, error: error };
+      }
+    });
+  }
 };
 
 //#endregion
