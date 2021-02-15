@@ -40,21 +40,9 @@ const traerTickets = async (req, res) => {
   const idUsuario = req.usuario.id;
 
   try {
-    // Tickets.find({
-    //       estado: { $ne: "cancelado" },
-    //       usuario: idUsuario})
-    //       .populate('dependencia')
-    //       .exec()
-    //       , function(err, tickets){
-    //         if(tickets!= null){
-    //           res.status(200).json(ticket);
-    //         }
-    //       }
-
-    // const ticket = await Tickets.find();
     if (perfil === "estandar") {
       const ticket = await Tickets.find({
-        estado: { $ne: "cancelado" },
+        // estado: { $ne: "cancelado" }, //se habilitará en un futuro cuando se afecte el rendimiento
         usuario: idUsuario,
       })
         .populate("dependencia")
@@ -64,7 +52,7 @@ const traerTickets = async (req, res) => {
       res.status(200).json(ticket);
     } else if (perfil === "especial") {
       const ticket = await Tickets.find({
-        estado: { $ne: "cancelado" },
+        // estado: { $ne: "cancelado" }, //se habilitará en un futuro cuando se afecte el rendimiento
         dependencia: dependencia,
       })
         .populate("dependencia")
@@ -74,79 +62,15 @@ const traerTickets = async (req, res) => {
       res.status(200).json(ticket);
     } else if (perfil === "administrador") {
       //*****opcion 1 */
-      const ticket = await Tickets.find({ estado: { $ne: "cancelado" } })
+      const ticket = await Tickets.find({
+        // estado: { $ne: "cancelado" }, //se habilitará en un futuro cuando se afecte el rendimiento
+      })
 
         .populate("dependencia")
         .populate("usuario")
         .populate("categoria")
         .sort("-_id");
       res.status(200).json(ticket);
-
-      //*****opcion 2 */
-      // Tickets.find()
-      //   .where("estado")
-      //   .ne("cancelado")
-      //   //.where('estado').equals('nuevo')
-      //   //.limite('2')
-      //   .populate('dependencia')
-      //   // .populate('usuario')
-      //   // .populate('categoria')
-      //   .sort("-_id")
-      //   .exec(obtenerTickets);
-
-      // function obtenerTickets(err, ticket) {
-      //   if (err) {
-      //     return res
-      //       .status(500)
-      //       .json({ msg: `Ha ocurrido un error`, error: err });
-      //   }
-      //   res.status(200).json(ticket);
-      // }
-
-      //*****opcion 3 */
-
-      //     Tickets.aggregate([
-      //     {
-      //       $lookup: {
-      //         from: 'dependencias',
-      //         as: 'dependencia',
-      //         localField: 'dependencia',
-      //         foreignField: '_id',
-      //         let: {dependencia: "$dependencia"},
-      //         pipeline: [
-      //           {$match: {$expr: {$eq: ['$dependencia', '$$dependencia']}}}
-      //         ]
-      //       }
-      //     },
-      //     {
-      //       $project: {
-      //         _id:1,
-      //         nombre: 1,
-      //         estado: 1,
-      //         codigo: 1,
-      //         titulo: 1,
-      //         descripcion: 1,
-      //         tipo:1,
-      //         usuario: 1,
-      //         categoria: 1,
-      //         prioridad: 1,
-      //         creacion: 1,
-      //         actualizacion: 1,
-      //         nombre: '$dependencias.nombre',
-
-      //       }
-      //     }
-      //   ]).exec( (err, result) => {
-      //     if(err){
-      //       return res
-      //            .status(500)
-      //              .json({ msg: `Ha ocurrido un error`, error: err });
-      //     }
-      //     if(result){
-      //       res.status(200).json(result);
-      //     }
-
-      //   })
     } else {
       return res.status(403).json({ msg: `Acceso no autorizado` });
     }
