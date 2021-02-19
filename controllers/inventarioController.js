@@ -22,6 +22,7 @@ const nuevoInventario = async (req, res) => {
 
   const nuevoInventario = req.body;
   nuevoInventario.usuario = idusuario;
+  nuevoInventario.estado = 'por asignar';
   const { nuevosCampos, categoria } = req.body;
   guardarNuevosCampos(nuevosCampos, categoria);
   inventario = new Inventario(nuevoInventario);
@@ -41,7 +42,7 @@ const nuevoInventario = async (req, res) => {
 
 //#endregion
 
-//#region TRAER ULTIMO
+//#region TRAER ULTIMO REGISTRO POR CATEGORIA
 
 /*-----------------------------------------------------------
       TRAER ULTIMO REGISTRO DE INVENTARIO CREADO X CATEGORIA
@@ -63,7 +64,27 @@ const ultimoRegistroInventario = async (req, res) => {
 
 //#endregion
 
-//#region TRAER
+//#region TRAER REGISTRO POR ID INVENTARIO
+
+/*-----------------------------------------------------------
+      TRAER  REGISTRO DE INVENTARIO X ID
+-------------------------------------------------------------*/
+
+const traerRegistroInventario = async (req, res) => {
+  console.log("POST - TRAER  REGISTRO DE INVENTARIO POR ID INVENTARIO");
+  try {
+    const idInventario = req.params.idInventario;
+    const reg = await Inventario.findOne({}).limit(1);
+    res.status(200).json(reg);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ msg: `Ha ocurrido un error`, error: error });
+  }
+};
+
+//#endregion
+
+//#region TRAER TODOS LOS REGISTROS
 
 /*-----------------------------------------------------------
            TRAER TODOS LOS REGISTROS DE INVENTARIO
@@ -229,4 +250,5 @@ module.exports = {
   traerInventario,
   actualizarInventario,
   eliminarInventario,
+  traerRegistroInventario,
 };

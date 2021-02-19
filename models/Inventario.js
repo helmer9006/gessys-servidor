@@ -105,6 +105,7 @@ const inventarioSchema = new Schema({
   actualizacion: {
     type: Date,
   },
+  estado: { type: String, lowercase: true, trim: true },
 });
 
 module.exports = mongoose.model("Inventario", inventarioSchema);

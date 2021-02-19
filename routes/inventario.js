@@ -29,9 +29,15 @@ router.post(
 
 
  /*--------------------------------------------------
-          TRAER ULTIMO REGISTRO DE INVENTARIO
+          TRAER ULTIMO REGISTRO DE INVENTARIO POR CATEGORIA
  ---------------------------------------------------*/
  router.get("/:idCategoria", auth, inventarioController.ultimoRegistroInventario);
+
+  /*--------------------------------------------------
+          TRAER REGISTRO DE INVENTARIO POR ID
+ ---------------------------------------------------*/
+ router.get("/id/:idInventario", auth, inventarioController.traerRegistroInventario);
+
 
  /*--------------------------------------------------
         ACTUALIZAR REGISTRO DE INVENTARIO POR ID
