@@ -38,26 +38,26 @@ const traerTickets = async (req, res) => {
   const perfil = req.usuario.perfil;
   const dependencia = req.usuario.dependencia;
   const idUsuario = req.usuario.id;
-
   try {
     if (perfil === "estandar") {
       const ticket = await Tickets.find({
         // estado: { $ne: "cancelado" }, //se habilitará en un futuro cuando se afecte el rendimiento
         usuario: idUsuario,
       })
-        .populate("dependencia")
-        .populate("usuario")
-        .populate("categoria")
+        .populate({ path: "dependencia", select: "nombre" })
+        .populate({ path: "usuario", select: "nombre" })
+        .populate({ path: "categoria", select: "nombre" })
         .sort("-_id");
       res.status(200).json(ticket);
     } else if (perfil === "especial") {
       const ticket = await Tickets.find({
         // estado: { $ne: "cancelado" }, //se habilitará en un futuro cuando se afecte el rendimiento
         dependencia: dependencia,
+        usuario: idUsuario,
       })
-        .populate("dependencia")
-        .populate("usuario")
-        .populate("categoria")
+        .populate({ path: "dependencia", select: "nombre" })
+        .populate({ path: "usuario", select: "nombre" })
+        .populate({ path: "categoria", select: "nombre" })
         .sort("-_id");
       res.status(200).json(ticket);
     } else if (perfil === "administrador") {
@@ -65,11 +65,11 @@ const traerTickets = async (req, res) => {
       const ticket = await Tickets.find({
         // estado: { $ne: "cancelado" }, //se habilitará en un futuro cuando se afecte el rendimiento
       })
-
-        .populate("dependencia")
-        .populate("usuario")
-        .populate("categoria")
+        .populate({ path: "dependencia", select: "nombre" })
+        .populate({ path: "usuario", select: "nombre" })
+        .populate({ path: "categoria", select: "nombre" })
         .sort("-_id");
+
       res.status(200).json(ticket);
     } else {
       return res.status(403).json({ msg: `Acceso no autorizado` });
@@ -180,6 +180,30 @@ const eliminarTicket = (req, res) => {
   }
 };
 
+const filtrarTickets = (tickets) => {
+  console.log(tickets);
+  let datos = [];
+  tickets.map((item) => {
+    let objeto = {};
+    for (let indice in item) {
+      if (indice === "categoria") {
+        objeto[indice] = item[indice]._id;
+        objeto["nombreCategoria"] = item[indice].nombre;
+      } else if (indice === "dependencia") {
+        objeto[indice] = item[indice]._id;
+        objeto["nombreDependencia"] = item[indice].nombre;
+      } else if (indice === "usuario") {
+        objeto[indice] = item[indice]._id;
+        objeto["nombreUsuario"] = item[indice].nombre;
+      } else {
+        objeto[indice] = item[indice];
+      }
+    }
+    datos.push(objeto);
+  });
+  console.log(datos);
+  return datos;
+};
 // const ultimoTicket = async () => {
 //   try {
 //     const ultimo = await Tickets.find().sort({ $codigo: -1 }).limit(1);
