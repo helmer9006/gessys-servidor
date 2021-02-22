@@ -180,30 +180,30 @@ const eliminarTicket = (req, res) => {
   }
 };
 
-const filtrarTickets = (tickets) => {
-  console.log(tickets);
-  let datos = [];
-  tickets.map((item) => {
-    let objeto = {};
-    for (let indice in item) {
-      if (indice === "categoria") {
-        objeto[indice] = item[indice]._id;
-        objeto["nombreCategoria"] = item[indice].nombre;
-      } else if (indice === "dependencia") {
-        objeto[indice] = item[indice]._id;
-        objeto["nombreDependencia"] = item[indice].nombre;
-      } else if (indice === "usuario") {
-        objeto[indice] = item[indice]._id;
-        objeto["nombreUsuario"] = item[indice].nombre;
-      } else {
-        objeto[indice] = item[indice];
-      }
-    }
-    datos.push(objeto);
-  });
-  console.log(datos);
-  return datos;
-};
+// const filtrarTickets = (tickets) => {
+//   // console.log(tickets);
+//   let datos = [];
+//   tickets.map((item) => {
+//     let objeto = {};
+//     for (let indice in item) {
+//       if (indice === "categoria") {
+//         objeto[indice] = item[indice]._id;
+//         objeto["nombreCategoria"] = item[indice].nombre;
+//       } else if (indice === "dependencia") {
+//         objeto[indice] = item[indice]._id;
+//         objeto["nombreDependencia"] = item[indice].nombre;
+//       } else if (indice === "usuario") {
+//         objeto[indice] = item[indice]._id;
+//         objeto["nombreUsuario"] = item[indice].nombre;
+//       } else {
+//         objeto[indice] = item[indice];
+//       }
+//     }
+//     datos.push(objeto);
+//   });
+//   console.log(datos);
+//   return datos;
+// };
 // const ultimoTicket = async () => {
 //   try {
 //     const ultimo = await Tickets.find().sort({ $codigo: -1 }).limit(1);
