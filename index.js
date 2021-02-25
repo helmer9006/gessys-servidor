@@ -37,6 +37,8 @@ app.use('/api/proveedores', require('./routes/proveedores'));
 app.use('/api/historial-inventario', require('./routes/HistoInventario'));
 app.use('/api/tipo-inventario', require('./routes/tipoInventario'));
 app.use('/api/nuevos-campos', require('./routes/nuevosCampos'));
+app.use('/api/archivos', require('./routes/archivos'));
+
 // Arrancar la app
 app.listen(port, '0.0.0.0', () => {
     console.log(`El servidor esta funcionando en el puerto ${port}`);
