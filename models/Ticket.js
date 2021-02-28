@@ -61,6 +61,10 @@ const ticketsSchema = new Schema({
       ref: "Mensajes",
     },
   ],
+  inventario: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Inventario",
+  },
   creacion: {
     type: Date,
     default: Date.now,
