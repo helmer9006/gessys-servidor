@@ -28,15 +28,21 @@ router.post(
  router.get("/", auth, inventarioController.traerInventario);
 
 
- /*--------------------------------------------------
+ /*--------------------------------------------------------
           TRAER ULTIMO REGISTRO DE INVENTARIO POR CATEGORIA
- ---------------------------------------------------*/
+ ---------------------------------------------------------*/
  router.get("/:idCategoria", auth, inventarioController.ultimoRegistroInventario);
 
   /*--------------------------------------------------
           TRAER REGISTRO DE INVENTARIO POR ID
  ---------------------------------------------------*/
  router.get("/id/:idInventario", auth, inventarioController.traerRegistroInventario);
+
+  /*-----------------------------------------------------------------------
+     TRAER REGISTROS DE INVENTARIO POR CATEGORIA Y POR USUARIO RESPONSABLE
+  -------------------------------------------------------------------------*/
+
+ router.get("/ticket/:idCategoria", auth, inventarioController.traerInventarioPorCategoria);
 
 
  /*--------------------------------------------------
