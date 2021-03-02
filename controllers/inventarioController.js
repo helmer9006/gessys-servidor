@@ -74,7 +74,7 @@ const traerRegistroInventario = async (req, res) => {
   console.log("POST - TRAER  REGISTRO DE INVENTARIO POR ID INVENTARIO");
   try {
     const idInventario = req.params.idInventario;
-    const reg = await Inventario.findOne({}).limit(1);
+    const reg = await Inventario.findOne({_id: idInventario}).limit(1);
     res.status(200).json(reg);
   } catch (error) {
     console.log(error);

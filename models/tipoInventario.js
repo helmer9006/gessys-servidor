@@ -5,7 +5,6 @@ const tipoInventarioSchema = new Schema({
   nombre: {
     type: String,
     required: true,
-    unique: true,
     uppercase: true,
     trim: true,
   },
