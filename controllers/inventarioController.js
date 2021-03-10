@@ -3,7 +3,6 @@ const NuevosCampos = require("../models/NuevosCampos");
 const { validationResult, body } = require("express-validator");
 
 //#region CREAR
-
 /*--------------------------------------------------
               CREAR NUEVO INVENTARIO
 ---------------------------------------------------*/
@@ -22,7 +21,7 @@ const nuevoInventario = async (req, res) => {
 
   const nuevoInventario = req.body;
   nuevoInventario.usuario = idusuario;
-  nuevoInventario.estado = 'por asignar';
+  nuevoInventario.estado = "por asignar";
   const { nuevosCampos, categoria } = req.body;
   guardarNuevosCampos(nuevosCampos, categoria);
   inventario = new Inventario(nuevoInventario);
@@ -74,7 +73,7 @@ const traerRegistroInventario = async (req, res) => {
   console.log("POST - TRAER  REGISTRO DE INVENTARIO POR ID INVENTARIO");
   try {
     const idInventario = req.params.idInventario;
-    const reg = await Inventario.findOne({_id: idInventario}).limit(1);
+    const reg = await Inventario.findOne({ _id: idInventario }).limit(1);
     res.status(200).json(reg);
   } catch (error) {
     console.log(error);
@@ -113,6 +112,68 @@ const traerInventario = async (req, res) => {
         .populate("responsable")
         .populate("proveedor")
         .populate("tipoInventario")
+        .sort("-_id");
+      res.status(200).json(inventario);
+    } else {
+      return res.status(403).json({ msg: `Acceso no autorizado` });
+    }
+  } catch (error) {
+    return res.status(500).json({ msg: `Ha ocurrido un error`, error: error });
+  }
+};
+
+//#endregion
+
+//#region TRAER TODOS LOS REGISTROS
+
+/*----------------------------------------------------------------------
+  TRAER REGISTROS DE INVENTARIO POR CATEGORIA Y POR USUARIO RESPONSABLE
+-----------------------------------------------------------------------*/
+
+const traerInventarioPorCategoria = async (req, res) => {
+  console.log(
+    "GET - TRAER REGISTROS DE INVENTARIO POR CATEGORIA Y POR USUARIO RESPONSABLE"
+  );
+  const { perfil, dependencia, id: idUsuario } = req.usuario;
+  const idCategoria = req.params.idCategoria;
+
+  try {
+    if (perfil === "estandar") {
+      const inventario = await Inventario.find({
+        responsable: idUsuario,
+        categoria: idCategoria,
+        estado: "asignado",
+      })
+        // .populate("dependencia")
+        // .populate("categoria")
+        // .populate("usuario")
+        // .populate("responsable")
+        // .populate("Proveedores")
+        .sort("-_id");
+      res.status(200).json(inventario);
+    } else if (perfil === "especial") {
+      const inventario = await Inventario.find({
+        categoria: idCategoria,
+        estado: "asignado",
+      })
+        // .populate("dependencia")
+        // .populate("categoria")
+        // .populate("usuario")
+        // .populate("responsable")
+        // .populate("Proveedores")
+        .sort("-_id");
+      res.status(200).json(inventario);
+    } else if (perfil === "administrador") {
+      const inventario = await Inventario.find({
+        categoria: idCategoria,
+        estado: "asignado",
+      })
+        // .populate("dependencia")
+        // .populate("categoria")
+        // .populate("usuario")
+        // .populate("responsable")
+        // .populate("proveedor")
+        // .populate("tipoInventario")
         .sort("-_id");
       res.status(200).json(inventario);
     } else {
@@ -251,4 +312,5 @@ module.exports = {
   actualizarInventario,
   eliminarInventario,
   traerRegistroInventario,
+  traerInventarioPorCategoria,
 };
