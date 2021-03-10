@@ -1,0 +1,1356 @@
+{
+	"info": {
+		"_postman_id": "3c65dc5e-2aa1-4e26-9e3b-393acedf5968",
+		"name": "GESSYS",
+		"description": "SISTEMA DE GESTION UCM",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "USUARIOS",
+			"item": [
+				{
+					"name": "Crear usuario",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMTRkMDkyYjdjMjgyNWQzNGNmNDQ3YSIsIm5vbWJyZSI6IkhlbG1lciBWaWxsYXJyZWFsIiwiZW1haWwiOiJoZWxtZXJ2aWxsYXJyZWFsQGhvdG1haWwuY29tIiwicGVyZmlsIjoiYWRtaW5pc3RyYWRvciIsImRlcGVuZGVuY2lhIjoiNjAxNGNmNGY3Yzk3ZjU0M2M0ZTkyMzNiIiwiZXN0YWRvIjp0cnVlLCJjcmVhY2lvbiI6IjIwMjEtMDEtMzBUMDM6MjA6NTAuMTI2WiIsInRpcG9JZGVudGlmaWNhY2lvbiI6IkNDIiwiaWRlbnRpZmljYWNpb24iOiIxMDUxNjM1MzQwIiwiaWF0IjoxNjEzMDA2NzI5LCJleHAiOjE2MTMwMzU1Mjl9.kj9g8_c-XCgHfSzwpl-fJvLKOZvMbxFG-VkJLfNZrMk",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"Enfermera Quinto Piso\",\r\n    \"password\":\"123456\",\r\n    \"email\":\"enfermeriaquintopiso@clinicalamagdalena.com\",\r\n    \"dependencia\":\"6014d4065f0dec0f105498f7\",\r\n    \"foto\":\"foto.jpg\",\r\n    \"perfil\":\"gestor\",\r\n    \"tipoIdentificacion\": \"CC\",\r\n    \"identificacion\": \"10511635340\"\r\n\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/usuarios",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Traer todos los usuarios",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMTRkMDkyYjdjMjgyNWQzNGNmNDQ3YSIsIm5vbWJyZSI6IkhlbG1lciBWaWxsYXJyZWFsIiwiZW1haWwiOiJoZWxtZXJ2aWxsYXJyZWFsQGhvdG1haWwuY29tIiwicGVyZmlsIjoiYWRtaW5pc3RyYWRvciIsImRlcGVuZGVuY2lhIjoiNjAxNGNmNGY3Yzk3ZjU0M2M0ZTkyMzNiIiwiZXN0YWRvIjp0cnVlLCJjcmVhY2lvbiI6IjIwMjEtMDEtMzBUMDM6MjA6NTAuMTI2WiIsInRpcG9JZGVudGlmaWNhY2lvbiI6IkNDIiwiaWRlbnRpZmljYWNpb24iOiIxMDUxNjM1MzQwIiwiaWF0IjoxNjEzODY4NjU4LCJleHAiOjE2MTM4OTc0NTh9.Lui7ndDSdu5h096u39ukCT340WaNA1NwLkarAdy-b9g",
+								"description": "\n",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/api/usuarios",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Autenticacion",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\":\"123456\",\r\n    \"email\":\"helmervillarreal@hotmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/auth",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Usuario autenticado",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMTRkMDkyYjdjMjgyNWQzNGNmNDQ3YSIsIm5vbWJyZSI6IkhlbG1lciBWaWxsYXJyZWFsIiwiZW1haWwiOiJoZWxtZXJ2aWxsYXJyZWFsQGhvdG1haWwuY29tIiwicGVyZmlsIjoiYWRtaW5pc3RyYWRvciIsImRlcGVuZGVuY2lhIjoiNjAxNGNmNGY3Yzk3ZjU0M2M0ZTkyMzNiIiwiZXN0YWRvIjp0cnVlLCJjcmVhY2lvbiI6IjIwMjEtMDEtMzBUMDM6MjA6NTAuMTI2WiIsInRpcG9JZGVudGlmaWNhY2lvbiI6IkNDIiwiaWRlbnRpZmljYWNpb24iOiIxMDUxNjM1MzQwIiwiaWF0IjoxNjEyNjQ1NDI0LCJleHAiOjE2MTI2NzQyMjR9.G2sPRt6YtAGVJ8XduIeK9e8cGy_WMi7LpxQdDHU8HAE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/api/auth",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CATEGORIAS",
+			"item": [
+				{
+					"name": "Crear nueva categoria",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYmFkYWFlMmQ5MjlkMjE1Yzg5YjJiOSIsIm5vbWJyZSI6IkhlbG1lciBWaWxsYXJyZWFsIiwiZW1haWwiOiJoZWxtZXJ2aWxsYXJyZWFsQGhvdG1haWwuY29tIiwicGVyZmlsIjoiYWRtaW5pc3RyYWRvciIsImRlcGVuZGVuY2lhIjoiNWZiYWRhNTkyZDkyOWQyMTVjODliMmI4IiwiZXN0YWRvIjp0cnVlLCJjcmVhY2lvbiI6IjIwMjEtMDMtMDJUMTY6MjI6MDMuODgyWiIsImlhdCI6MTYxNDcwMjEyMywiZXhwIjoxNjE0NzMwOTIzfQ.4eMqHDX_jrV83AI5bv9odYLFU0PR3j5F37uloO-YpTw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"COMPUTADORES\",\r\n    \"dependencia\": \"5fbada592d929d215c89b2b8\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/categorias",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"categorias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Traer todas las categorias",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYWVhMTFkNjYzMDY0MDFmNDJhOWJjNyIsIm5vbWJyZSI6IkhlbG1lciBWaWxsYXJyZWFsIiwiZW1haWwiOiJoZWxtZXJ2aWxsYXJyZWFsQGhvdG1haWwuY29tIiwiaWF0IjoxNjA2MDgwNzIzLCJleHAiOjE2MDYxMDk1MjN9.KboGLo3x3jlPizPTmeSn1DwU5QWudNmuUZpX2k4E9uY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/categorias",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"categorias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar categoria por Id",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYWVhMTFkNjYzMDY0MDFmNDJhOWJjNyIsIm5vbWJyZSI6IkhlbG1lciBWaWxsYXJyZWFsIiwiZW1haWwiOiJoZWxtZXJ2aWxsYXJyZWFsQGhvdG1haWwuY29tIiwiaWF0IjoxNjA2MDgwNzIzLCJleHAiOjE2MDYxMDk1MjN9.KboGLo3x3jlPizPTmeSn1DwU5QWudNmuUZpX2k4E9uY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"_id\": \"5fbae7ddc98c2752a836ab01\",\r\n        \"nombre\": \"cctv\",\r\n        \"dependencia\": \"5fbada592d929d215c89b2b8\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/categorias",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"categorias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar una categoria",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "5fb69a2be6a31d07e0994b21",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/api/categorias/5fb69a2be6a31d07e0994b21",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"categorias",
+								"5fb69a2be6a31d07e0994b21"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DEPENDENCIAS",
+			"item": [
+				{
+					"name": "Crear nueva dependencia",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMTRkMDkyYjdjMjgyNWQzNGNmNDQ3YSIsIm5vbWJyZSI6IkhlbG1lciBWaWxsYXJyZWFsIiwiZW1haWwiOiJoZWxtZXJ2aWxsYXJyZWFsQGhvdG1haWwuY29tIiwicGVyZmlsIjoiYWRtaW5pc3RyYWRvciIsImRlcGVuZGVuY2lhIjoiNjAxNGNmNGY3Yzk3ZjU0M2M0ZTkyMzNiIiwiZXN0YWRvIjp0cnVlLCJjcmVhY2lvbiI6IjIwMjEtMDEtMzBUMDM6MjA6NTAuMTI2WiIsInRpcG9JZGVudGlmaWNhY2lvbiI6IkNDIiwiaWRlbnRpZmljYWNpb24iOiIxMDUxNjM1MzQwIiwiaWF0IjoxNjE0MzA3ODg2LCJleHAiOjE2MTQzMzY2ODZ9.UMXhYWUO3-lBjEYdUImDvuVhr9ndMGVtvHNnHdFnHEg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"AIRES ACONDICIONADOS\",\r\n    \"descripcion\": \"DEPENDENCIA DE SOPORTE A AIRES Y EQUIPOS DE REFRIGERACION\",\r\n    \"soporte\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/dependencias",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"dependencias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Trae  todas la dependencias",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYmFkYWFlMmQ5MjlkMjE1Yzg5YjJiOSIsIm5vbWJyZSI6IkhlbG1lciBWaWxsYXJyZWFsIiwiZW1haWwiOiJoZWxtZXJ2aWxsYXJyZWFsQGhvdG1haWwuY29tIiwiaWF0IjoxNjA2MDg1MDA0LCJleHAiOjE2MDYxMTM4MDR9.BZ6eD_XaYRr-oVePZzWVGwtIzA5_rKBm2MdWSvcg_wQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/api/dependencias",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"dependencias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar dependencia",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYmFkYWFlMmQ5MjlkMjE1Yzg5YjJiOSIsIm5vbWJyZSI6IkhlbG1lciBWaWxsYXJyZWFsIiwiZW1haWwiOiJoZWxtZXJ2aWxsYXJyZWFsQGhvdG1haWwuY29tIiwiaWF0IjoxNjA2MDg1MDA0LCJleHAiOjE2MDYxMTM4MDR9.BZ6eD_XaYRr-oVePZzWVGwtIzA5_rKBm2MdWSvcg_wQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"_id\": \"5fbada592d929d215c89b2b8\",\r\n        \"nombre\": \"SISTEMAS\",\r\n        \"descripcion\": \"departamento de sistemas\",\r\n        \"soporte\": true \r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/dependencias",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"dependencias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar una dependencia por ID",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYWVhMTFkNjYzMDY0MDFmNDJhOWJjNyIsIm5vbWJyZSI6IkhlbG1lciBWaWxsYXJyZWFsIiwiZW1haWwiOiJoZWxtZXJ2aWxsYXJyZWFsQGhvdG1haWwuY29tIiwiaWF0IjoxNjA1ODM5ODg1LCJleHAiOjE2MDU4Njg2ODV9.gxRnjUXNcD6pxshArvCAAqQP9UyiEVMcf5asuIBJH2E",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/api/dependencias/5fb6eb4fd18b502268df5b9asss",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"dependencias",
+								"5fb6eb4fd18b502268df5b9asss"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TICKETS",
+			"item": [
+				{
+					"name": "Crear nuevo ticket",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMTRkMDkyYjdjMjgyNWQzNGNmNDQ3YSIsIm5vbWJyZSI6IkhlbG1lciBWaWxsYXJyZWFsIiwiZW1haWwiOiJoZWxtZXJ2aWxsYXJyZWFsQGhvdG1haWwuY29tIiwicGVyZmlsIjoiYWRtaW5pc3RyYWRvciIsImRlcGVuZGVuY2lhIjoiNjAxNGNmNGY3Yzk3ZjU0M2M0ZTkyMzNiIiwiZXN0YWRvIjp0cnVlLCJjcmVhY2lvbiI6IjIwMjEtMDEtMzBUMDM6MjA6NTAuMTI2WiIsInRpcG9JZGVudGlmaWNhY2lvbiI6IkNDIiwiaWRlbnRpZmljYWNpb24iOiIxMDUxNjM1MzQwIiwiaWF0IjoxNjE0NTM1MjkxLCJleHAiOjE2MTQ1NjQwOTF9.CwOhMZaEVEL3UHHnWY2f_jCevkijxwGtMPl_ryANbKc",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"codigo\":\"COM-0003\",\r\n    \"titulo\": \"ARREGLAR HC ADM 912525\",\r\n    \"descripcion\": \"Arreglo de historia clincia\",\r\n    \"tipo\":\"Soporte\",\r\n    \"dependencia\": \"6014cf4f7c97f543c4e9233b\",\r\n    \"categoria\":\"603bdb05d6c7b13554ee1124\",\r\n     \"inventario\":\"601e1d0ff25e37751db40ce6\",\r\n    \"prioridad\":\"alta\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/tickets",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"tickets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Traer todos los tickets",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMTRkMDkyYjdjMjgyNWQzNGNmNDQ3YSIsIm5vbWJyZSI6IkhlbG1lciBWaWxsYXJyZWFsIiwiZW1haWwiOiJoZWxtZXJ2aWxsYXJyZWFsQGhvdG1haWwuY29tIiwicGVyZmlsIjoiYWRtaW5pc3RyYWRvciIsImRlcGVuZGVuY2lhIjoiNjAxNGNmNGY3Yzk3ZjU0M2M0ZTkyMzNiIiwiZXN0YWRvIjp0cnVlLCJjcmVhY2lvbiI6IjIwMjEtMDEtMzBUMDM6MjA6NTAuMTI2WiIsInRpcG9JZGVudGlmaWNhY2lvbiI6IkNDIiwiaWRlbnRpZmljYWNpb24iOiIxMDUxNjM1MzQwIiwiaWF0IjoxNjEzOTQ2NTg4LCJleHAiOjE2MTM5NzUzODh9.mXwzUDBZsQHQMIBBGwdzwsgfqR6bgbmcUC5LQbhmhTo",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/tickets",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"tickets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Traer tickets por estado",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYzE3OWE1ZGRkNjQxMmZkODcwZjFkYyIsIm5vbWJyZSI6Ik9zd2FsZG8gTWlyYW5kYSIsImVtYWlsIjoib3N3YWxkb21pcmFuZG9AZ21haWwuY29tIiwicGVyZmlsIjoiZXNwZWNpYWwiLCJkZXBlbmRlbmNpYSI6IjVmYzE3OTI2ZGRkNjQxMmZkODcwZjFkYiIsImVzdGFkbyI6dHJ1ZSwiaWF0IjoxNjA2NTE1MTcyLCJleHAiOjE2MDY1NDM5NzJ9.RIrkq3NGO5SxWYbFWvHvlnAtOoF_XzYkmwjTb3wXXvQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/api/tickets/nuevo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"tickets",
+								"nuevo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar estado de tickets por Id",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYmFkYWFlMmQ5MjlkMjE1Yzg5YjJiOSIsIm5vbWJyZSI6IkhlbG1lciBWaWxsYXJyZWFsIiwiZW1haWwiOiJoZWxtZXJ2aWxsYXJyZWFsQGhvdG1haWwuY29tIiwiaWF0IjoxNjA2MjMxOTk4LCJleHAiOjE2MDYyNjA3OTh9.KqBdhXihUwkONjSn4tIM56nvYMRQPsf1S8hxvJhpsm4",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/api/tickets/5fbb0ef1733f3a1c442d77c5/proceso",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"tickets",
+								"5fbb0ef1733f3a1c442d77c5",
+								"proceso"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar ticket por ID",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYmFkYWFlMmQ5MjlkMjE1Yzg5YjJiOSIsIm5vbWJyZSI6IkhlbG1lciBWaWxsYXJyZWFsIiwiZW1haWwiOiJoZWxtZXJ2aWxsYXJyZWFsQGhvdG1haWwuY29tIiwicGVyZmlsIjoiYWRtaW5pc3RyYWRvciIsImRlcGVuZGVuY2lhIjoiNWZiYWRhNTkyZDkyOWQyMTVjODliMmI4IiwiZXN0YWRvIjp0cnVlLCJpYXQiOjE2MTAyMjc0MjYsImV4cCI6MTYxMDI1NjIyNn0.HNiFQDWOBQYf66g9O_qJMnurqtlJdZivro5G--hHLfo",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"estado\": \"resuelto\",\r\n    \"_id\": \"5fbb0ef1733f3a1c442d77c5\",\r\n    \"codigo\": \"SIS-0001\",\r\n    \"titulo\": \"ARREGLO HC PCTE 895023\",\r\n    \"descripcion\": \"arreglo hc pcte 895023. liberar acetaminofem del 1 0a las 9 am\",\r\n    \"tipo\": \"historia clínica\",\r\n    \"usuario\": \"5fbb0a1bc84ef33a9cf52949\",\r\n    \"dependencia\": \"5fbada592d929d215c89b2b8\",\r\n    \"categoria\": \"5fbae7ddc98c2752a836ab01\",\r\n    \"prioridad\": \"media\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/tickets/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"tickets",
+								""
+							]
+						},
+						"description": "Se debe pasar un objeto con el id y los valores del ticket."
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar ticket por ID",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYmFkYWFlMmQ5MjlkMjE1Yzg5YjJiOSIsIm5vbWJyZSI6IkhlbG1lciBWaWxsYXJyZWFsIiwiZW1haWwiOiJoZWxtZXJ2aWxsYXJyZWFsQGhvdG1haWwuY29tIiwiaWF0IjoxNjA2MjMxOTk4LCJleHAiOjE2MDYyNjA3OTh9.KqBdhXihUwkONjSn4tIM56nvYMRQPsf1S8hxvJhpsm4",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/api/tickets/5fbd7866daeb3f4620da0869",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"tickets",
+								"5fbd7866daeb3f4620da0869"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "MENSAJES",
+			"item": [
+				{
+					"name": "Crear mensaje",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMTRkMDkyYjdjMjgyNWQzNGNmNDQ3YSIsIm5vbWJyZSI6IkhlbG1lciBWaWxsYXJyZWFsIiwiZW1haWwiOiJoZWxtZXJ2aWxsYXJyZWFsQGhvdG1haWwuY29tIiwicGVyZmlsIjoiYWRtaW5pc3RyYWRvciIsImRlcGVuZGVuY2lhIjoiNjAxNGNmNGY3Yzk3ZjU0M2M0ZTkyMzNiIiwiZXN0YWRvIjp0cnVlLCJjcmVhY2lvbiI6IjIwMjEtMDEtMzBUMDM6MjA6NTAuMTI2WiIsInRpcG9JZGVudGlmaWNhY2lvbiI6IkNDIiwiaWRlbnRpZmljYWNpb24iOiIxMDUxNjM1MzQwIiwiaWF0IjoxNjE0NDYxNTc0LCJleHAiOjE2MTQ0OTAzNzR9.j2HpSc6YyupZ_XbLcHp4xerLcMKvKuO9tNoNZugKPWE",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"descripcion\": \"Mensaje de pruebas\",\r\n     \"ticket\":\"603a8e71d9a3040f34649716\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/mensajes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"mensajes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Traer Mensajes por ticket",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMTRkMDkyYjdjMjgyNWQzNGNmNDQ3YSIsIm5vbWJyZSI6IkhlbG1lciBWaWxsYXJyZWFsIiwiZW1haWwiOiJoZWxtZXJ2aWxsYXJyZWFsQGhvdG1haWwuY29tIiwicGVyZmlsIjoiYWRtaW5pc3RyYWRvciIsImRlcGVuZGVuY2lhIjoiNjAxNGNmNGY3Yzk3ZjU0M2M0ZTkyMzNiIiwiZXN0YWRvIjp0cnVlLCJjcmVhY2lvbiI6IjIwMjEtMDEtMzBUMDM6MjA6NTAuMTI2WiIsInRpcG9JZGVudGlmaWNhY2lvbiI6IkNDIiwiaWRlbnRpZmljYWNpb24iOiIxMDUxNjM1MzQwIiwiaWF0IjoxNjE0NDYxNTc0LCJleHAiOjE2MTQ0OTAzNzR9.j2HpSc6YyupZ_XbLcHp4xerLcMKvKuO9tNoNZugKPWE",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/api/mensajes/603a8e71d9a3040f34649716",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"mensajes",
+								"603a8e71d9a3040f34649716"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "INVENTARIO",
+			"item": [
+				{
+					"name": "Crear registro de Inventario",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMTRkMDkyYjdjMjgyNWQzNGNmNDQ3YSIsIm5vbWJyZSI6IkhlbG1lciBWaWxsYXJyZWFsIiwiZW1haWwiOiJoZWxtZXJ2aWxsYXJyZWFsQGhvdG1haWwuY29tIiwicGVyZmlsIjoiYWRtaW5pc3RyYWRvciIsImRlcGVuZGVuY2lhIjoiNjAxNGNmNGY3Yzk3ZjU0M2M0ZTkyMzNiIiwiZXN0YWRvIjp0cnVlLCJjcmVhY2lvbiI6IjIwMjEtMDEtMzBUMDM6MjA6NTAuMTI2WiIsInRpcG9JZGVudGlmaWNhY2lvbiI6IkNDIiwiaWRlbnRpZmljYWNpb24iOiIxMDUxNjM1MzQwIiwiaWF0IjoxNjEzNjk5MzMzLCJleHAiOjE2MTM3MjgxMzN9.HDv4V68eUjCN4Z2XDlYGswNs56JP3Sr_YvZ0781EM5M",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"codigo\": \"COM-0019\",\r\n    \"marca\": \"DELL\",\r\n    \"modelo\": \"INSPIRON\",\r\n    \"serial\": \"12SD525241A1212D\",\r\n    \"responsable\":\"6014d092b7c2825d34cf447a\",\r\n    \"piso\":\" PISO 2\",\r\n    \"dependencia\": \"6014cf4f7c97f543c4e9233b\",\r\n    \"categoria\": \"6014d2bf5f0dec0f105498f6\",\r\n    \"tipoInventario\": \"60248991b7cc4243c0e0fbab\",\r\n    \"proveedor\": \"6014cf4f7c97f543c4e9233b\",\r\n    \"observacion\": \"ninguna\",\r\n    \"anexo\": \"\",\r\n    \"fechaFactura\": \"2021-01-31T20:38:14.856+00:00\",\r\n    \"nuevosCampos\": [{\r\n        \"clave\": \"largo\",\r\n        \"valor\": \"150 cm\",\r\n        \"tipoCampo\": \"TextField\"\r\n    },{\r\n        \"clave\": \"peso\",\r\n        \"valor\": \"20 kg\",\r\n        \"tipoCampo\": \"TextField\"\r\n    },\r\n    {\r\n        \"clave\": \"ancho\",\r\n        \"valor\": \"100 cm\",\r\n        \"tipoCampo\": \"TextField\"\r\n    }, {\r\n        \"clave\": \"alto\",\r\n        \"valor\": \"70 cm\",\r\n        \"tipoCampo\": \"TextField\"\r\n    }]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/inventario/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"inventario",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Traer registros Inventario",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMTRkMDkyYjdjMjgyNWQzNGNmNDQ3YSIsIm5vbWJyZSI6IkhlbG1lciBWaWxsYXJyZWFsIiwiZW1haWwiOiJoZWxtZXJ2aWxsYXJyZWFsQGhvdG1haWwuY29tIiwicGVyZmlsIjoiYWRtaW5pc3RyYWRvciIsImRlcGVuZGVuY2lhIjoiNjAxNGNmNGY3Yzk3ZjU0M2M0ZTkyMzNiIiwiZXN0YWRvIjp0cnVlLCJjcmVhY2lvbiI6IjIwMjEtMDEtMzBUMDM6MjA6NTAuMTI2WiIsInRpcG9JZGVudGlmaWNhY2lvbiI6IkNDIiwiaWRlbnRpZmljYWNpb24iOiIxMDUxNjM1MzQwIiwiaWF0IjoxNjEzMTg5MTExLCJleHAiOjE2MTMyMTc5MTF9.VLiPUJ_aZ3dQyXR_JpW9-xgmlDXHtUSl6Q9VF4B4TKE",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/api/inventario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"inventario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Treaer ultimo registro de Inventario x Id categoria",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYmFkYWFlMmQ5MjlkMjE1Yzg5YjJiOSIsIm5vbWJyZSI6IkhlbG1lciBWaWxsYXJyZWFsIiwiZW1haWwiOiJoZWxtZXJ2aWxsYXJyZWFsQGhvdG1haWwuY29tIiwicGVyZmlsIjoiYWRtaW5pc3RyYWRvciIsImRlcGVuZGVuY2lhIjoiNWZiYWRhNTkyZDkyOWQyMTVjODliMmI4IiwiZXN0YWRvIjp0cnVlLCJjcmVhY2lvbiI6IjIwMjEtMDMtMDNUMDE6NTA6NTUuNjU1WiIsImlhdCI6MTYxNDczNjI1NSwiZXhwIjoxNjE0NzY1MDU1fQ.qsNCEqedaVhR3TB3ZM4hBCk1sE3VPJlRbxaN-wiO2qY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/api/inventario/603e688b4d7b022b4cb9a89d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"inventario",
+								"603e688b4d7b022b4cb9a89d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar registro de inventario",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMTRkMDkyYjdjMjgyNWQzNGNmNDQ3YSIsIm5vbWJyZSI6IkhlbG1lciBWaWxsYXJyZWFsIiwiZW1haWwiOiJoZWxtZXJ2aWxsYXJyZWFsQGhvdG1haWwuY29tIiwicGVyZmlsIjoiYWRtaW5pc3RyYWRvciIsImRlcGVuZGVuY2lhIjoiNjAxNGNmNGY3Yzk3ZjU0M2M0ZTkyMzNiIiwiZXN0YWRvIjp0cnVlLCJjcmVhY2lvbiI6IjIwMjEtMDEtMzBUMDM6MjA6NTAuMTI2WiIsInRpcG9JZGVudGlmaWNhY2lvbiI6IkNDIiwiaWRlbnRpZmljYWNpb24iOiIxMDUxNjM1MzQwIiwiaWF0IjoxNjEzNjk5MzMzLCJleHAiOjE2MTM3MjgxMzN9.HDv4V68eUjCN4Z2XDlYGswNs56JP3Sr_YvZ0781EM5M",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"602f1ee351aae9b84c664598\",\r\n\"marca\": \"DELL\",\r\n    \"modelo\": \"INSPIRON\",\r\n    \"serial\": \"12SD525241A1212D\",\r\n    \"responsable\":\"6014d092b7c2825d34cf447a\",\r\n    \"piso\":\" PISO 2\",\r\n    \"dependencia\": \"6014cf4f7c97f543c4e9233b\",\r\n    \"categoria\": \"6014d2bf5f0dec0f105498f6\",\r\n    \"tipoInventario\": \"60248991b7cc4243c0e0fbab\",\r\n    \"proveedor\": \"6014cf4f7c97f543c4e9233b\",\r\n    \"observacion\": \"ninguna\",\r\n    \"anexo\": \"\",\r\n    \"fechaFactura\": \"2021-01-31T20:38:14.856+00:00\",\r\n    \"nuevosCampos\": [{\r\n        \"clave\": \"ancho\",\r\n        \"valor\": \"50 cm\",\r\n        \"tipoCampo\": \"TextField\"\r\n    }],\r\n    \"estado\": \"asgnado\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/inventario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"inventario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar registro de Inventario",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMTRkMDkyYjdjMjgyNWQzNGNmNDQ3YSIsIm5vbWJyZSI6IkhlbG1lciBWaWxsYXJyZWFsIiwiZW1haWwiOiJoZWxtZXJ2aWxsYXJyZWFsQGhvdG1haWwuY29tIiwicGVyZmlsIjoiYWRtaW5pc3RyYWRvciIsImRlcGVuZGVuY2lhIjoiNjAxNGNmNGY3Yzk3ZjU0M2M0ZTkyMzNiIiwiZXN0YWRvIjp0cnVlLCJjcmVhY2lvbiI6IjIwMjEtMDEtMzBUMDM6MjA6NTAuMTI2WiIsInRpcG9JZGVudGlmaWNhY2lvbiI6IkNDIiwiaWRlbnRpZmljYWNpb24iOiIxMDUxNjM1MzQwIiwiaWF0IjoxNjEyNzIyMTU3LCJleHAiOjE2MTI3NTA5NTd9.XK5n5rrDfR16IfY6Axbz_wkKRdra821OYXCzGs4JPEM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/api/inventario/602062cefeccb92346c26a2b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"inventario",
+								"602062cefeccb92346c26a2b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Traer inventario por Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMTRkMDkyYjdjMjgyNWQzNGNmNDQ3YSIsIm5vbWJyZSI6IkhlbG1lciBWaWxsYXJyZWFsIiwiZW1haWwiOiJoZWxtZXJ2aWxsYXJyZWFsQGhvdG1haWwuY29tIiwicGVyZmlsIjoiYWRtaW5pc3RyYWRvciIsImRlcGVuZGVuY2lhIjoiNjAxNGNmNGY3Yzk3ZjU0M2M0ZTkyMzNiIiwiZXN0YWRvIjp0cnVlLCJjcmVhY2lvbiI6IjIwMjEtMDEtMzBUMDM6MjA6NTAuMTI2WiIsInRpcG9JZGVudGlmaWNhY2lvbiI6IkNDIiwiaWRlbnRpZmljYWNpb24iOiIxMDUxNjM1MzQwIiwiaWF0IjoxNjEzNjk5MzMzLCJleHAiOjE2MTM3MjgxMzN9.HDv4V68eUjCN4Z2XDlYGswNs56JP3Sr_YvZ0781EM5M",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/api/inventario/id/601e1d0ff25e37751db40ce6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"inventario",
+								"id",
+								"601e1d0ff25e37751db40ce6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Traer Registros de Inventario por categoria y según usuario",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYmIwYTFiYzg0ZWYzM2E5Y2Y1Mjk0OSIsIm5vbWJyZSI6IkVuZmVybWVyaWEgU2V4dG8gUGlzbyIsImVtYWlsIjoiZW5mZXJtZXJpYXNleHRvcGlzb0BjbGluaWNhbGFtYWdkYWxlbmEuY29tIiwicGVyZmlsIjoiZXN0YW5kYXIiLCJkZXBlbmRlbmNpYSI6IjVmYmIwOWY5Yzg0ZWYzM2E5Y2Y1Mjk0OCIsImVzdGFkbyI6dHJ1ZSwiY3JlYWNpb24iOiIyMDIwLTExLTIzVDAxOjAyOjE5LjQ1MVoiLCJpYXQiOjE2MTQ3MDM0NzQsImV4cCI6MTYxNDczMjI3NH0.sOfLnnZot4CdtQHhKdORqYEE5jS7sJgEj46wxnKUpDE",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/api/inventario/ticket/5fbae7ddc98c2752a836ab01",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"inventario",
+								"ticket",
+								"5fbae7ddc98c2752a836ab01"
+							]
+						},
+						"description": "Usuario estandar: solo retornara los registros de inventario de la categoria seleccionada donde su usario sea el resposnable. \r\nUsuario especial: retornará todos los registros de inventario de la categoria seleccionada\r\nUsuario: administrador:  retornará todos los registros de inventario de la categoria seleccionada\r\n"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PROVEEDORES",
+			"item": [
+				{
+					"name": "Crear proveedor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMTRkMDkyYjdjMjgyNWQzNGNmNDQ3YSIsIm5vbWJyZSI6IkhlbG1lciBWaWxsYXJyZWFsIiwiZW1haWwiOiJoZWxtZXJ2aWxsYXJyZWFsQGhvdG1haWwuY29tIiwicGVyZmlsIjoiYWRtaW5pc3RyYWRvciIsImRlcGVuZGVuY2lhIjoiNjAxNGNmNGY3Yzk3ZjU0M2M0ZTkyMzNiIiwiZXN0YWRvIjp0cnVlLCJjcmVhY2lvbiI6IjIwMjEtMDEtMzBUMDM6MjA6NTAuMTI2WiIsInRpcG9JZGVudGlmaWNhY2lvbiI6IkNDIiwiaWRlbnRpZmljYWNpb24iOiIxMDUxNjM1MzQwIiwiaWF0IjoxNjEyNjQ1NjgzLCJleHAiOjE2MTI2NzQ0ODN9._6Jg7YcsNM5UJwgRR8fD7wISgNWi6tSd0DBNLqRfEHo",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"AOL\",\r\n    \"representanteLegal\":\"Edgar Pilonieta\",\r\n    \"tipoIdentificacion\":\"NIT\",\r\n    \"identificacion\":\"800038024\",\r\n    \"direccion\":\"bucarmanga cabecera\",\r\n    \"telefono\":\"6412552\",\r\n    \"email\":\"gerencia@aol.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/proveedores",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"proveedores"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Traer Proveedores",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMTRkMDkyYjdjMjgyNWQzNGNmNDQ3YSIsIm5vbWJyZSI6IkhlbG1lciBWaWxsYXJyZWFsIiwiZW1haWwiOiJoZWxtZXJ2aWxsYXJyZWFsQGhvdG1haWwuY29tIiwicGVyZmlsIjoiYWRtaW5pc3RyYWRvciIsImRlcGVuZGVuY2lhIjoiNjAxNGNmNGY3Yzk3ZjU0M2M0ZTkyMzNiIiwiZXN0YWRvIjp0cnVlLCJjcmVhY2lvbiI6IjIwMjEtMDEtMzBUMDM6MjA6NTAuMTI2WiIsInRpcG9JZGVudGlmaWNhY2lvbiI6IkNDIiwiaWRlbnRpZmljYWNpb24iOiIxMDUxNjM1MzQwIiwiaWF0IjoxNjEyNzIyMTU3LCJleHAiOjE2MTI3NTA5NTd9.XK5n5rrDfR16IfY6Axbz_wkKRdra821OYXCzGs4JPEM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/api/proveedores",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"proveedores"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "HISTORIAL INVENTARIO",
+			"item": [
+				{
+					"name": "Crear registro histial de inventario",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMTRkMDkyYjdjMjgyNWQzNGNmNDQ3YSIsIm5vbWJyZSI6IkhlbG1lciBWaWxsYXJyZWFsIiwiZW1haWwiOiJoZWxtZXJ2aWxsYXJyZWFsQGhvdG1haWwuY29tIiwicGVyZmlsIjoiYWRtaW5pc3RyYWRvciIsImRlcGVuZGVuY2lhIjoiNjAxNGNmNGY3Yzk3ZjU0M2M0ZTkyMzNiIiwiZXN0YWRvIjp0cnVlLCJjcmVhY2lvbiI6IjIwMjEtMDEtMzBUMDM6MjA6NTAuMTI2WiIsInRpcG9JZGVudGlmaWNhY2lvbiI6IkNDIiwiaWRlbnRpZmljYWNpb24iOiIxMDUxNjM1MzQwIiwiaWF0IjoxNjEyNzU4MTcyLCJleHAiOjE2MTI3ODY5NzJ9.-6iuiLXTrRSvGp-0uQLErBfgcjk-oo5sDibeJPMK8YE",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"observacion\":\"Mantenimiento Correctivo\",\r\n    \"inventario\":\"601e1d0ff25e37751db40ce6\",\r\n    \"anexo\":{\r\n        \"titulo\":\"Soporte de Mantenimiento\",\r\n        \"url\":\"/uploads/doc-fecha-hora.pdf\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/historial-inventario/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"historial-inventario",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Traer ticket por  ID Inventario",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMTRkMDkyYjdjMjgyNWQzNGNmNDQ3YSIsIm5vbWJyZSI6IkhlbG1lciBWaWxsYXJyZWFsIiwiZW1haWwiOiJoZWxtZXJ2aWxsYXJyZWFsQGhvdG1haWwuY29tIiwicGVyZmlsIjoiYWRtaW5pc3RyYWRvciIsImRlcGVuZGVuY2lhIjoiNjAxNGNmNGY3Yzk3ZjU0M2M0ZTkyMzNiIiwiZXN0YWRvIjp0cnVlLCJjcmVhY2lvbiI6IjIwMjEtMDEtMzBUMDM6MjA6NTAuMTI2WiIsInRpcG9JZGVudGlmaWNhY2lvbiI6IkNDIiwiaWRlbnRpZmljYWNpb24iOiIxMDUxNjM1MzQwIiwiaWF0IjoxNjEzMDkxNTA1LCJleHAiOjE2MTMxMjAzMDV9.pblqsrjQpJb77GCBk6jLtyTnxsQBxJ2gVkrQfiUdOao",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/api/historial-inventario/601e1d0ff25e37751db40ce6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"historial-inventario",
+								"601e1d0ff25e37751db40ce6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar registro por ID",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMTRkMDkyYjdjMjgyNWQzNGNmNDQ3YSIsIm5vbWJyZSI6IkhlbG1lciBWaWxsYXJyZWFsIiwiZW1haWwiOiJoZWxtZXJ2aWxsYXJyZWFsQGhvdG1haWwuY29tIiwicGVyZmlsIjoiYWRtaW5pc3RyYWRvciIsImRlcGVuZGVuY2lhIjoiNjAxNGNmNGY3Yzk3ZjU0M2M0ZTkyMzNiIiwiZXN0YWRvIjp0cnVlLCJjcmVhY2lvbiI6IjIwMjEtMDEtMzBUMDM6MjA6NTAuMTI2WiIsInRpcG9JZGVudGlmaWNhY2lvbiI6IkNDIiwiaWRlbnRpZmljYWNpb24iOiIxMDUxNjM1MzQwIiwiaWF0IjoxNjEyNzU4MTcyLCJleHAiOjE2MTI3ODY5NzJ9.-6iuiLXTrRSvGp-0uQLErBfgcjk-oo5sDibeJPMK8YE",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"60208808060b2741723d307d\",\r\n    \"observacion\":\"Mantenimiento preventivo, se realiza limpieza general  Actualizado\",\r\n    \"anexo\":{\r\n        \"titulo\":\"Soporte de Mantenimiento\",\r\n        \"url\":\"/uploads/doc-fecha-hora.pdf\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/historial-inventario/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"historial-inventario",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMTRkMDkyYjdjMjgyNWQzNGNmNDQ3YSIsIm5vbWJyZSI6IkhlbG1lciBWaWxsYXJyZWFsIiwiZW1haWwiOiJoZWxtZXJ2aWxsYXJyZWFsQGhvdG1haWwuY29tIiwicGVyZmlsIjoiYWRtaW5pc3RyYWRvciIsImRlcGVuZGVuY2lhIjoiNjAxNGNmNGY3Yzk3ZjU0M2M0ZTkyMzNiIiwiZXN0YWRvIjp0cnVlLCJjcmVhY2lvbiI6IjIwMjEtMDEtMzBUMDM6MjA6NTAuMTI2WiIsInRpcG9JZGVudGlmaWNhY2lvbiI6IkNDIiwiaWRlbnRpZmljYWNpb24iOiIxMDUxNjM1MzQwIiwiaWF0IjoxNjEyNzU4MTcyLCJleHAiOjE2MTI3ODY5NzJ9.-6iuiLXTrRSvGp-0uQLErBfgcjk-oo5sDibeJPMK8YE",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/api/historial-inventario//6020bff4bd1f8677163db667?aut",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"historial-inventario",
+								"",
+								"6020bff4bd1f8677163db667"
+							],
+							"query": [
+								{
+									"key": "aut",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TIPO INVENTARIO",
+			"item": [
+				{
+					"name": "Crear Tipo Inventario",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMTRkMDkyYjdjMjgyNWQzNGNmNDQ3YSIsIm5vbWJyZSI6IkhlbG1lciBWaWxsYXJyZWFsIiwiZW1haWwiOiJoZWxtZXJ2aWxsYXJyZWFsQGhvdG1haWwuY29tIiwicGVyZmlsIjoiYWRtaW5pc3RyYWRvciIsImRlcGVuZGVuY2lhIjoiNjAxNGNmNGY3Yzk3ZjU0M2M0ZTkyMzNiIiwiZXN0YWRvIjp0cnVlLCJjcmVhY2lvbiI6IjIwMjEtMDEtMzBUMDM6MjA6NTAuMTI2WiIsInRpcG9JZGVudGlmaWNhY2lvbiI6IkNDIiwiaWRlbnRpZmljYWNpb24iOiIxMDUxNjM1MzQwIiwiaWF0IjoxNjEzMDA2NzI5LCJleHAiOjE2MTMwMzU1Mjl9.kj9g8_c-XCgHfSzwpl-fJvLKOZvMbxFG-VkJLfNZrMk",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"Portatil\",\r\n    \"dependencia\":\"6014cf4f7c97f543c4e9233b\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/tipo-inventario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"tipo-inventario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Traer los tipos de inventario x dependencia",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMTRkMDkyYjdjMjgyNWQzNGNmNDQ3YSIsIm5vbWJyZSI6IkhlbG1lciBWaWxsYXJyZWFsIiwiZW1haWwiOiJoZWxtZXJ2aWxsYXJyZWFsQGhvdG1haWwuY29tIiwicGVyZmlsIjoiYWRtaW5pc3RyYWRvciIsImRlcGVuZGVuY2lhIjoiNjAxNGNmNGY3Yzk3ZjU0M2M0ZTkyMzNiIiwiZXN0YWRvIjp0cnVlLCJjcmVhY2lvbiI6IjIwMjEtMDEtMzBUMDM6MjA6NTAuMTI2WiIsInRpcG9JZGVudGlmaWNhY2lvbiI6IkNDIiwiaWRlbnRpZmljYWNpb24iOiIxMDUxNjM1MzQwIiwiaWF0IjoxNjEzMDA2NzI5LCJleHAiOjE2MTMwMzU1Mjl9.kj9g8_c-XCgHfSzwpl-fJvLKOZvMbxFG-VkJLfNZrMk",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/api/tipo-inventario/6014cf4f7c97f543c4e9233b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"tipo-inventario",
+								"6014cf4f7c97f543c4e9233b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar tipo de inventario",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMTRkMDkyYjdjMjgyNWQzNGNmNDQ3YSIsIm5vbWJyZSI6IkhlbG1lciBWaWxsYXJyZWFsIiwiZW1haWwiOiJoZWxtZXJ2aWxsYXJyZWFsQGhvdG1haWwuY29tIiwicGVyZmlsIjoiYWRtaW5pc3RyYWRvciIsImRlcGVuZGVuY2lhIjoiNjAxNGNmNGY3Yzk3ZjU0M2M0ZTkyMzNiIiwiZXN0YWRvIjp0cnVlLCJjcmVhY2lvbiI6IjIwMjEtMDEtMzBUMDM6MjA6NTAuMTI2WiIsInRpcG9JZGVudGlmaWNhY2lvbiI6IkNDIiwiaWRlbnRpZmljYWNpb24iOiIxMDUxNjM1MzQwIiwiaWF0IjoxNjEzMDA2NzI5LCJleHAiOjE2MTMwMzU1Mjl9.kj9g8_c-XCgHfSzwpl-fJvLKOZvMbxFG-VkJLfNZrMk",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\":\"60248991b7cc4243c0e0fbab\",\r\n    \"nombre\":\"Portatil Update\",\r\n    \"dependencia\":\"6014cf4f7c97f543c4e9233b\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/tipo-inventario/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"tipo-inventario",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar tipo inventario",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMTRkMDkyYjdjMjgyNWQzNGNmNDQ3YSIsIm5vbWJyZSI6IkhlbG1lciBWaWxsYXJyZWFsIiwiZW1haWwiOiJoZWxtZXJ2aWxsYXJyZWFsQGhvdG1haWwuY29tIiwicGVyZmlsIjoiYWRtaW5pc3RyYWRvciIsImRlcGVuZGVuY2lhIjoiNjAxNGNmNGY3Yzk3ZjU0M2M0ZTkyMzNiIiwiZXN0YWRvIjp0cnVlLCJjcmVhY2lvbiI6IjIwMjEtMDEtMzBUMDM6MjA6NTAuMTI2WiIsInRpcG9JZGVudGlmaWNhY2lvbiI6IkNDIiwiaWRlbnRpZmljYWNpb24iOiIxMDUxNjM1MzQwIiwiaWF0IjoxNjEzMDA2NzI5LCJleHAiOjE2MTMwMzU1Mjl9.kj9g8_c-XCgHfSzwpl-fJvLKOZvMbxFG-VkJLfNZrMk",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/api/tipo-inventario/60248991b7cc4243c0e0fbab",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"tipo-inventario",
+								"60248991b7cc4243c0e0fbab"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "NUEVOS CAMPOS",
+			"item": [
+				{
+					"name": "Crear Nuevo Campo - Campos nuevos no repetidos",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMTRkMDkyYjdjMjgyNWQzNGNmNDQ3YSIsIm5vbWJyZSI6IkhlbG1lciBWaWxsYXJyZWFsIiwiZW1haWwiOiJoZWxtZXJ2aWxsYXJyZWFsQGhvdG1haWwuY29tIiwicGVyZmlsIjoiYWRtaW5pc3RyYWRvciIsImRlcGVuZGVuY2lhIjoiNjAxNGNmNGY3Yzk3ZjU0M2M0ZTkyMzNiIiwiZXN0YWRvIjp0cnVlLCJjcmVhY2lvbiI6IjIwMjEtMDEtMzBUMDM6MjA6NTAuMTI2WiIsInRpcG9JZGVudGlmaWNhY2lvbiI6IkNDIiwiaWRlbnRpZmljYWNpb24iOiIxMDUxNjM1MzQwIiwiaWF0IjoxNjEzMDkxNTA1LCJleHAiOjE2MTMxMjAzMDV9.pblqsrjQpJb77GCBk6jLtyTnxsQBxJ2gVkrQfiUdOao",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"categoria\":\"6014d2bf5f0dec0f105498f6\",\r\n    \"clave\":\"Altura\",\r\n    \"valor\":\"50 cm\",\r\n    \"tipoCampo\":\"TextField\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/nuevos-campos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"nuevos-campos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "traer los nuevos campos por categoria",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMTRkMDkyYjdjMjgyNWQzNGNmNDQ3YSIsIm5vbWJyZSI6IkhlbG1lciBWaWxsYXJyZWFsIiwiZW1haWwiOiJoZWxtZXJ2aWxsYXJyZWFsQGhvdG1haWwuY29tIiwicGVyZmlsIjoiYWRtaW5pc3RyYWRvciIsImRlcGVuZGVuY2lhIjoiNjAxNGNmNGY3Yzk3ZjU0M2M0ZTkyMzNiIiwiZXN0YWRvIjp0cnVlLCJjcmVhY2lvbiI6IjIwMjEtMDEtMzBUMDM6MjA6NTAuMTI2WiIsInRpcG9JZGVudGlmaWNhY2lvbiI6IkNDIiwiaWRlbnRpZmljYWNpb24iOiIxMDUxNjM1MzQwIiwiaWF0IjoxNjEzMjQ0MTA0LCJleHAiOjE2MTMyNzI5MDR9.HRymjFE5MCvyyQqTCsfLJTRblYYOfI0W7KA91opC6IY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/api/nuevos-campos/6014d2bf5f0dec0f105498f6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"nuevos-campos",
+								"6014d2bf5f0dec0f105498f6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ANEXOS",
+			"item": [
+				{
+					"name": "Subir Anexo",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMTRkMDkyYjdjMjgyNWQzNGNmNDQ3YSIsIm5vbWJyZSI6IkhlbG1lciBWaWxsYXJyZWFsIiwiZW1haWwiOiJoZWxtZXJ2aWxsYXJyZWFsQGhvdG1haWwuY29tIiwicGVyZmlsIjoiYWRtaW5pc3RyYWRvciIsImRlcGVuZGVuY2lhIjoiNjAxNGNmNGY3Yzk3ZjU0M2M0ZTkyMzNiIiwiZXN0YWRvIjp0cnVlLCJjcmVhY2lvbiI6IjIwMjEtMDEtMzBUMDM6MjA6NTAuMTI2WiIsInRpcG9JZGVudGlmaWNhY2lvbiI6IkNDIiwiaWRlbnRpZmljYWNpb24iOiIxMDUxNjM1MzQwIiwiaWF0IjoxNjE0MjE3MzUzLCJleHAiOjE2MTQyNDYxNTN9.fzQNjUyfayraMqnl5g-519sRv3NURtFq5pm1K8OR3kc",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "archivo",
+									"type": "file",
+									"src": "/C:/Users/HELMER/Pictures/Saved Pictures/ivana-cajina-343416-unsplash.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/archivos/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"archivos",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "subir multiples anexos",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMTRkMDkyYjdjMjgyNWQzNGNmNDQ3YSIsIm5vbWJyZSI6IkhlbG1lciBWaWxsYXJyZWFsIiwiZW1haWwiOiJoZWxtZXJ2aWxsYXJyZWFsQGhvdG1haWwuY29tIiwicGVyZmlsIjoiYWRtaW5pc3RyYWRvciIsImRlcGVuZGVuY2lhIjoiNjAxNGNmNGY3Yzk3ZjU0M2M0ZTkyMzNiIiwiZXN0YWRvIjp0cnVlLCJjcmVhY2lvbiI6IjIwMjEtMDEtMzBUMDM6MjA6NTAuMTI2WiIsInRpcG9JZGVudGlmaWNhY2lvbiI6IkNDIiwiaWRlbnRpZmljYWNpb24iOiIxMDUxNjM1MzQwIiwiaWF0IjoxNjE0MjE3MzUzLCJleHAiOjE2MTQyNDYxNTN9.fzQNjUyfayraMqnl5g-519sRv3NURtFq5pm1K8OR3kc",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "archivo",
+									"type": "file",
+									"src": "/C:/Users/HELMER/Pictures/Saved Pictures/pietro-de-grandi-445497-unsplash.jpg"
+								},
+								{
+									"key": "archivo",
+									"type": "file",
+									"src": "/C:/Users/HELMER/Pictures/Saved Pictures/jason-wong-292853-unsplash.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/archivos/multiples",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"archivos",
+								"multiples"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

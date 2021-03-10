@@ -6,7 +6,6 @@ const historialSchema = new Schema({
     //text area con observacion para el registro del historial
     type: String,
     required: true,
-    unique: true,
     uppercase: true,
     trim: true,
   },
