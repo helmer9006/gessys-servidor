@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-
+var fecha = new Date();
 const ticketsSchema = new Schema({
   codigo: {
     //codigo para identificar el ticket
@@ -49,11 +49,12 @@ const ticketsSchema = new Schema({
     required: true,
     trim: true,
   },
-  estado: { // nuevo, proceso, resuelto, cancelado
+  estado: {
+    // nuevo, proceso, resuelto, cancelado
     type: String,
     required: true,
     trim: true,
-    default: 'nuevo'
+    default: "nuevo",
   },
   mensaje: [
     {
@@ -71,6 +72,10 @@ const ticketsSchema = new Schema({
   },
   actualizacion: {
     type: Date,
+  },
+  offset: {
+    type: Number,
+    default: fecha.getTimezoneOffset(),
   },
 });
 
