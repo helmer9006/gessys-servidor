@@ -17,6 +17,11 @@ router.post('/', auth,
     usuarioController.nuevoUsuario
 );
 
+//DEVUELVE TODOS LOS USUARIOS
 router.get('/',auth, usuarioController.traerUsuario);
+
+//ACTUALIZAR USUARIO POR ID
+router.put("/", auth, usuarioController.actualizarUsuario);
+
 
 module.exports = router;

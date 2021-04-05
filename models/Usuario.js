@@ -53,6 +53,9 @@ const usuariosSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  actualizacion: {
+    type: Date,
+  },
 });
 
 module.exports = mongoose.model("Usuarios", usuariosSchema);

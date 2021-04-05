@@ -71,8 +71,6 @@ const traerTickets = async (req, res) => {
         .sort("-_id");
       
       res.status(200).json(ticket);
-      var fecha = new Date( ticket[16].creacion.getTime() -  ( ticket.offset * 60000));
-      console.log(fecha)
     } else {
       return res.status(403).json({ msg: `Acceso no autorizado` });
     }
