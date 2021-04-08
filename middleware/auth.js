@@ -15,7 +15,7 @@ module.exports = (req, res, next) => {
       } catch (error) {
         return res
           .status(403)
-          .json({ msg: "Acceso no autorizado, JWT no valido o Expirado." });
+          .json({ msg: "Acceso no autorizado o sesión caducada." });
       }
     } else {
       return res.status(403).json({ msg: "Acceso no autorizado, sin token." });

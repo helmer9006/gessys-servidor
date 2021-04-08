@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-
-const inventarioSchema = new Schema({
+const { appConfig } = require("../config");
+const inventarioSchema =  new Schema({
   codigo: {
     //codigo para identificar el equipo, accesorio u herramienta, tres inicial de la categoria relacionada seguido de numero incremental de 4 digitos ejemplo: TEL-0001
     type: String,
@@ -106,6 +106,15 @@ const inventarioSchema = new Schema({
     type: Date,
   },
   estado: { type: String, lowercase: true, trim: true },
-});
+})
+
+
+//metodo para guardar automaticamente los archivos
+inventarioSchema.methods.setArchivoUrl = function setArchivoUrl(filename) {
+
+  const { host, port} = appConfig;
+  this.anexo = `${host}:${port}/public/${filename}`
+
+};
 
 module.exports = mongoose.model("Inventario", inventarioSchema);

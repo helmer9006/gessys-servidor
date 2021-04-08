@@ -24,7 +24,12 @@ const nuevoInventario = async (req, res) => {
   nuevoInventario.estado = "por asignar";
   const { nuevosCampos, categoria } = req.body;
   guardarNuevosCampos(nuevosCampos, categoria);
+
   inventario = new Inventario(nuevoInventario);
+  if (req.file) {
+    const { filename } = req.file;
+    inventario.setArchivoUrl(filename);
+  }
   if (perfil === "especial" || perfil === "administrador") {
     try {
       await inventario.save();
@@ -275,18 +280,20 @@ const eliminarInventario = (req, res) => {
 const guardarNuevosCampos = async (nuevosCampos, categoria) => {
   const campos = await NuevosCampos.find({ categoria: categoria }).sort("-_id");
   const diferente = [];
-
-  nuevosCampos.map((item) => {
-    let isdiferente = false;
-    campos.map((elemento) => {
-      if (elemento.clave === item.clave) {
-        isdiferente = true;
+  if (nuevosCampos) {
+    nuevosCampos.map((item) => {
+      let isdiferente = false;
+      campos.map((elemento) => {
+        if (elemento.clave === item.clave) {
+          isdiferente = true;
+        }
+      });
+      if (!isdiferente) {
+        diferente.push(item);
       }
     });
-    if (!isdiferente) {
-      diferente.push(item);
-    }
-  });
+  }
+
   //si existen campos diferentes guardardos en diccionarios nuevosCampos
   if (diferente.length > 0) {
     diferente.map(async (element) => {
