@@ -11,7 +11,7 @@ const upload = require("../libs/storage");
 router.post(
   "/",
   auth,
-  upload.single("anexo"),
+  upload.single("archivo"),
   [
     check("codigo", "El codigo es Obligatorio").not().isEmpty(),
     check("piso", "El piso es Obligatorio").not().isEmpty(),

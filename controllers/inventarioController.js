@@ -56,7 +56,10 @@ const ultimoRegistroInventario = async (req, res) => {
   console.log("POST - TRAER ULTIMO REGISTRO DE INVENTARIO POR CATEGORIA");
   try {
     const categoria = req.params.idCategoria;
-    const reg = await Inventario.findOne({}, { codigo: 1 })
+    const reg = await Inventario.findOne(
+      { categoria: categoria },
+      { codigo: 1 }
+    )
       .sort({ field: "asc", _id: -1 })
       .limit(1);
     res.status(200).json(reg);
