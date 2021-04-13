@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-
+const { appConfig } = require("../config");
 const usuariosSchema = new Schema({
   email: {
     type: String,
@@ -15,10 +15,10 @@ const usuariosSchema = new Schema({
     trim: false,
   },
   identificacion: {
-   type: String,
-   required: true,
-   trim: false,
-   unique: true,
+    type: String,
+    required: true,
+    trim: false,
+    unique: true,
   },
   nombre: {
     type: String,
@@ -47,7 +47,7 @@ const usuariosSchema = new Schema({
   estado: {
     type: Boolean,
     required: true,
-    default: true
+    default: true,
   },
   creacion: {
     type: Date,
@@ -57,5 +57,11 @@ const usuariosSchema = new Schema({
     type: Date,
   },
 });
+
+//metodo para guardar automaticamente los archivos
+usuariosSchema.methods.setFotoUrl = function setFotoUrl(filename) {
+  const { host, port } = appConfig;
+  this.foto = `${host}:${port}/public/${filename}`;
+};
 
 module.exports = mongoose.model("Usuarios", usuariosSchema);
