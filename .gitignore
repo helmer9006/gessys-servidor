@@ -1,4 +1,5 @@
 #Ignorar la carpeta de modulos
 node_modules/
+uploads/
 INFORMACION.docx
 actividades con jonathan.xlsx
