@@ -5,8 +5,9 @@ const mensajesSchema = new Schema({
   descripcion: {
     type: String,
     required: true,
-    lowercase: true,
+    // lowercase: true,
     trim: true,
+    unique: false,
   },
   usuario: {
     type: Schema.Types.ObjectId,

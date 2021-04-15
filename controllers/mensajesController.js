@@ -2,8 +2,9 @@ const Mensajes = require("../models/Mensajes");
 const { validationResult, body } = require("express-validator");
 
 //***************CREAR NUEVO MENSAJE***************
+
 const crearMensaje = async (req, res) => {
-  console.log("POST - CREAR NUEVA CATEGORIA ");
+  console.log("POST - CREAR NUEVO MENSAJE ");
 
   //***************MOSTRAR ERRORES DE VALIDACION***************
   const errores = validationResult(req);
@@ -14,16 +15,14 @@ const crearMensaje = async (req, res) => {
   const { id: idUsuario, perfil } = req.usuario;
 
   //***************CREAR NUEVO MENSAJE***************
+
+  //***************CREAR NUEVO MENSAJE***************
   mensaje = new Mensajes(req.body);
   mensaje.usuario = idUsuario;
   console.log(mensaje);
   try {
     await mensaje.save();
     res.json({ msg: "Mensaje Creado Correctamente." });
-    console.log(
-      "ultimo mensaje creado",
-      coleccion.Find().SetSortOrder(SortBy.Descending("_id")).SetLimit(1)
-    );
   } catch (error) {
     console.log(error);
     return res.status(500).json({ msg: `Ha ocurrido un error`, error: error });
@@ -37,7 +36,7 @@ const traerMensajesPorTicket = async (req, res) => {
   try {
     const mensajes = await Mensajes.find({ ticket: idTicket })
       .populate("usuario")
-      .sort("_id");
+      .sort({ field: "asc", _id: -1 });
     res.status(200).json(mensajes);
   } catch (error) {
     return res.status(500).json({ msg: `Ha ocurrido un error`, error: error });
