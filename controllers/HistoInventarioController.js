@@ -12,9 +12,12 @@ const nuevoHistoInventario = async (req, res) => {
   }
 
   //***************CREAR NUEVO HISTORIAL***************
-  historial = new HistoInventario(req.body);
+  const { anexo } = req.body;
 
-  if (req.anexo.url !== "") {
+  historial = new HistoInventario(req.body);
+ console.log("req",req.filename)
+  if (anexo.url !== "") {
+    console.log("validacion");
     historial.setArchivoUrl(req.filename);
   }
 

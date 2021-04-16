@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const { appConfig } = require("../config");
 
 const historialSchema = new Schema({
   observacion: {
@@ -8,6 +9,7 @@ const historialSchema = new Schema({
     required: true,
     uppercase: true,
     trim: true,
+    unique: false,
   },
   inventario: {
     //id del registro de inventario
@@ -27,6 +29,7 @@ const historialSchema = new Schema({
         type: String,
         lowercase: true,
         trim: true,
+        unique: false,
       },
       url: {
         type: String,
@@ -47,7 +50,7 @@ const historialSchema = new Schema({
 //metodo para guardar automaticamente los archivos
 historialSchema.methods.setArchivoUrl = function setArchivoUrl(filename) {
   const { host, port } = appConfig;
-  this.anexo.url = `${host}:${port}/public/${filename}`;
+  this.anexo[0].url = `${host}:${port}/public/${filename}`;
 };
 
 module.exports = mongoose.model("HistoInventario", historialSchema);

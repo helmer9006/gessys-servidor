@@ -22,12 +22,12 @@ const nuevoInventario = async (req, res) => {
   const nuevoInventario = req.body;
   nuevoInventario.usuario = idusuario;
   nuevoInventario.estado = "por asignar";
-  const { nuevosCampos, categoria } = req.body;
+  const { nuevosCampos, categoria, anexo } = req.body;
   guardarNuevosCampos(nuevosCampos, categoria);
 
   inventario = new Inventario(nuevoInventario);
 
-  if (req.anexo !== '') {
+  if (anexo !== "") {
     inventario.setArchivoUrl(req.filename);
   }
 
