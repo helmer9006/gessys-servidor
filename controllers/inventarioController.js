@@ -26,6 +26,11 @@ const nuevoInventario = async (req, res) => {
   guardarNuevosCampos(nuevosCampos, categoria);
 
   inventario = new Inventario(nuevoInventario);
+
+  if (req.anexo !== '') {
+    inventario.setArchivoUrl(req.filename);
+  }
+
   if (req.file) {
     const { filename } = req.file;
     inventario.setArchivoUrl(filename);

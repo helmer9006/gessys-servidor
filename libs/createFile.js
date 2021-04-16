@@ -1,15 +1,15 @@
 const separarCadenas = require("./../libs/separarCadenas");
 const fs = require("fs");
 module.exports = (req, res, next) => {
-  const foto = req.body.foto;
+  const anexo = req.body.anexo;
 
-  if (!foto) {
+  if (!anexo) {
     return next();
   }
   const espacio = " ";
   const coma = ",";
   //console.log(authHeader)
-  const result = separarCadenas(foto, coma);
+  const result = separarCadenas(anexo, coma);
   const nombreArchivo = Math.random().toString(36) + `.${result.extension}`;
 
   //crear archivo

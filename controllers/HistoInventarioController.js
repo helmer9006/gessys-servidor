@@ -13,6 +13,9 @@ const nuevoHistoInventario = async (req, res) => {
 
   //***************CREAR NUEVO HISTORIAL***************
   historial = new HistoInventario(req.body);
+
+ 
+
   const perfil = req.usuario.perfil;
   historial.usuario = req.usuario.id;
   if (perfil === "especial" || perfil === "administrador") {

@@ -44,4 +44,13 @@ const historialSchema = new Schema({
   },
 });
 
+//metodo para guardar automaticamente los archivos
+historialSchema.methods.setArchivoUrl = function setArchivoUrl(filename) {
+
+  const { host, port} = appConfig;
+  this.anexo.url = `${host}:${port}/public/${filename}`
+
+};
+
+
 module.exports = mongoose.model("HistoInventario", historialSchema);
