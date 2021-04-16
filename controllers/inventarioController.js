@@ -31,10 +31,6 @@ const nuevoInventario = async (req, res) => {
     inventario.setArchivoUrl(req.filename);
   }
 
-  if (req.file) {
-    const { filename } = req.file;
-    inventario.setArchivoUrl(filename);
-  }
   if (perfil === "especial" || perfil === "administrador") {
     try {
       await inventario.save();

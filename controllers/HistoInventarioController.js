@@ -14,7 +14,9 @@ const nuevoHistoInventario = async (req, res) => {
   //***************CREAR NUEVO HISTORIAL***************
   historial = new HistoInventario(req.body);
 
- 
+  if (req.anexo.url !== "") {
+    historial.setArchivoUrl(req.filename);
+  }
 
   const perfil = req.usuario.perfil;
   historial.usuario = req.usuario.id;

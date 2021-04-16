@@ -3,13 +3,13 @@ const router = express.Router();
 const HistoInventarioController = require("../controllers/HistoInventarioController");
 const { check } = require("express-validator");
 const auth = require("../middleware/auth");
-const upload = require("../libs/storage");
+const createFile = require("../libs/createFile");
 
 //CREAR NUEVA HISTORIAL DE INVENTARIO
 router.post(
   "/",
   auth,
-  upload.single("anexo"),
+  createFile,
   [
     check("observacion", "La observacion es Obligatoria").not().isEmpty(),
     check("inventario", "El inventario es Obligatorio").not().isEmpty(),
