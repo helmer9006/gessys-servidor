@@ -4,12 +4,12 @@ const usuarioController = require("../controllers/usuarioController");
 const { check } = require("express-validator");
 const auth = require("../middleware/auth");
 const upload = require("../libs/storage");
-const createFile = require("../libs/createFile");
+const createFoto = require("../libs/createFoto");
 
 router.post(
   "/",
   auth,
-  createFile,
+  createFoto,
   [
     check("nombre", "El Nombre es Obligatorio").not().isEmpty(),
     check("tipoIdentificacion", "El tipo de identificacion es Obligatorio")

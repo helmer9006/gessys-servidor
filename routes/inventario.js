@@ -3,8 +3,7 @@ const router = express.Router();
 const inventarioController = require("../controllers/inventarioController");
 const { check } = require("express-validator");
 const auth = require("../middleware/auth");
-const createFile = require("../libs/createFile");
-
+const createFileInventario = require("../libs/createFileInventario");
 
 /*--------------------------------------------------
               CREAR NUEVO INVENTARIO
@@ -12,7 +11,7 @@ const createFile = require("../libs/createFile");
 router.post(
   "/",
   auth,
-  createFile,
+  createFileInventario,
   [
     check("codigo", "El codigo es Obligatorio").not().isEmpty(),
     check("piso", "El piso es Obligatorio").not().isEmpty(),
