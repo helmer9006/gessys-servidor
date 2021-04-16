@@ -33,6 +33,6 @@ router.post(
 router.get("/", auth, usuarioController.traerUsuario);
 
 //ACTUALIZAR USUARIO POR ID
-router.put("/", auth, createFile, usuarioController.actualizarUsuario);
+router.put("/", auth, createFoto, usuarioController.actualizarUsuario);
 
 module.exports = router;
