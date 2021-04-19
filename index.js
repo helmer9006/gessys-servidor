@@ -9,17 +9,28 @@ const app = express();
 conectarDB();
 
 // Habilitar Cors
-const opcionesCors = {
-  origin: process.env.FRONTEND_URL,
-};
-app.use(cors(opcionesCors));
+// const opcionesCors = {
+//   origin: process.env.FRONTEND_URL,
+// };
+// app.use(cors(opcionesCors));
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method"
+  );
+  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+  res.header("Allow", "GET, POST, OPTIONS, PUT, DELETE");
+  next();
+});
 
 // Puerto de la app
 const port = process.env.PORT || 4000;
 
 // Habilitar leer los valores de un body
-app.use(express.json({limit: '50mb'}));
-app.use(express.urlencoded({limit: '50mb'}));
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ limit: "50mb" }));
 
 // Rutas de la app
 app.use("/api/usuarios", require("./routes/usuarios"));
