@@ -7,6 +7,7 @@ const auth = require("../middleware/auth");
 //CREAR NUEVO TICKETS
 router.post(
   "/",
+  auth,
   [
     check("titulo", "El Nombre es Obligatorio").not().isEmpty(),
     //check("codigo", "El area es Obligatoria").not().isEmpty(),
@@ -33,6 +34,5 @@ router.put("/", auth, ticketsController.actualizarTicket);
 
 //ELIMINAR TICKET
 router.delete("/:idTicket", auth, ticketsController.eliminarTicket);
-
 
 module.exports = router;
