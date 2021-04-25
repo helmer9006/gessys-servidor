@@ -9,13 +9,14 @@ const app = express();
 conectarDB();
 
 // Habilitar Cors
+
 app.use(cors());
 // const opcionesCors = {
 //   origin: process.env.FRONTEND_URL,
 // };
 // app.use(cors(opcionesCors));
 
-// app.use((req, res, next) => {
+app.use((req, res, next) => {
 //   res.header("Access-Control-Allow-Origin", "*");
 //   res.header(
 //     "Access-Control-Allow-Headers",
@@ -25,6 +26,7 @@ app.use(cors());
 //   res.header("Allow", "GET, POST, OPTIONS, PUT, DELETE");
 //   next();
 // });
+// 
 
 // Puerto de la app
 const port = process.env.PORT || 4000;
