@@ -8,38 +8,10 @@ const app = express();
 // Conectar a la base de datos
 conectarDB();
 
-// Habilitar Cors
-// app.use(cors());
-
-// var whitelist = ["http://localhost:4000"];
-// var corsOptions = {
-//   origin: function (origin, callback) {
-//     if (whitelist.indexOf(origin) !== -1) {
-//       callback(null, true);
-//     } else {
-//       callback(new Error("No permitido por CORS"));
-//     }
-//   },
-// };
-
-//app.get('/', cors(corsOptions), (req, res) =>{
-
-// app.use(cors());
 const opcionesCors = {
   origin: process.env.FRONTEND_URL,
 };
 app.use(cors(opcionesCors));
-
-// app.use((req, res, next) => {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method"
-//   );
-//   res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
-//   res.header("Allow", "GET, POST, OPTIONS, PUT, DELETE");
-//   next();
-// });
 
 // Puerto de la app
 const port = process.env.PORT || 4000;
