@@ -9,28 +9,26 @@ const app = express();
 conectarDB();
 
 // Habilitar Cors
-app.use(cors());
+// app.use(cors());
 
-var whitelist = ['https://gessys.netlify.app']
-var corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error('No permitido por CORS'))
-    }
-  }
-}
-
+// var whitelist = ["http://localhost:4000"];
+// var corsOptions = {
+//   origin: function (origin, callback) {
+//     if (whitelist.indexOf(origin) !== -1) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error("No permitido por CORS"));
+//     }
+//   },
+// };
 
 //app.get('/', cors(corsOptions), (req, res) =>{
 
-
 // app.use(cors());
-// const opcionesCors = {
-//   origin: process.env.FRONTEND_URL,
-// };
-// app.use(cors(opcionesCors));
+const opcionesCors = {
+  origin: process.env.FRONTEND_URL,
+};
+app.use(cors(opcionesCors));
 
 // app.use((req, res, next) => {
 //   res.header("Access-Control-Allow-Origin", "*");
@@ -51,20 +49,20 @@ app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb" }));
 
 // Rutas de la app
-app.use("/api/usuarios", cors(corsOptions), require("./routes/usuarios"));
-app.use("/api/categorias",cors(corsOptions), require("./routes/categorias"));
-app.use("/api/dependencias", cors(corsOptions),require("./routes/dependencias"));
-app.use("/api/tickets", cors(corsOptions),  require("./routes/tickets"));
-app.use("/api/auth", cors(corsOptions), require("./routes/auth"));
-app.use("/api/mensajes", cors(corsOptions), require("./routes/mensajes"));
-app.use("/api/inventario",cors(corsOptions), require("./routes/inventario"));
-app.use("/api/proveedores", cors(corsOptions), require("./routes/proveedores"));
-app.use("/api/historial-inventario",cors(corsOptions), require("./routes/HistoInventario"));
-app.use("/api/tipo-inventario", cors(corsOptions), require("./routes/tipoInventario"));
-app.use("/api/nuevos-campos", cors(corsOptions), require("./routes/nuevosCampos"));
-app.use("/api/archivos", cors(corsOptions), require("./routes/archivos"));
-app.use("/public", cors(corsOptions), express.static(`${__dirname}/uploads`)); // Habilitar carpeta publica
-app.use("/api/dashboard", cors(corsOptions), require("./routes/dashboard"));
+app.use("/api/usuarios", require("./routes/usuarios"));
+app.use("/api/categorias", require("./routes/categorias"));
+app.use("/api/dependencias", require("./routes/dependencias"));
+app.use("/api/tickets", require("./routes/tickets"));
+app.use("/api/auth", require("./routes/auth"));
+app.use("/api/mensajes", require("./routes/mensajes"));
+app.use("/api/inventario", require("./routes/inventario"));
+app.use("/api/proveedores", require("./routes/proveedores"));
+app.use("/api/historial-inventario", require("./routes/HistoInventario"));
+app.use("/api/tipo-inventario", require("./routes/tipoInventario"));
+app.use("/api/nuevos-campos", require("./routes/nuevosCampos"));
+app.use("/api/archivos", require("./routes/archivos"));
+app.use("/public", express.static(`${__dirname}/uploads`)); // Habilitar carpeta publica
+app.use("/api/dashboard", require("./routes/dashboard"));
 
 // Arrancar la app
 app.listen(port, "0.0.0.0", () => {
