@@ -22,7 +22,7 @@ const nuevoTicket = async (req, res) => {
     .sort({ field: "asc", _id: -1 })
     .limit(1);
 
-  nuevoTicket.codigo === null
+  ultimoTicket === null
     ? (nuevoTicket.codigo = 1)
     : (nuevoTicket.codigo = ultimoTicket.codigo + 1);
 
