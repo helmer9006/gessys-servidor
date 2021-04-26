@@ -22,7 +22,10 @@ const nuevoTicket = async (req, res) => {
     .sort({ field: "asc", _id: -1 })
     .limit(1);
 
-  nuevoTicket.codigo = ultimoTicket.codigo + 1;
+  nuevoTicket.codigo === null
+    ? (nuevoTicket.codigo = 1)
+    : (nuevoTicket.codigo = ultimoTicket.codigo + 1);
+
   ticket = new Tickets(nuevoTicket);
   try {
     await ticket.save();
@@ -69,7 +72,7 @@ const traerTickets = async (req, res) => {
         .populate({ path: "usuario", select: "nombre" })
         .populate({ path: "categoria", select: "nombre" })
         .sort("-_id");
-      
+
       res.status(200).json(ticket);
     } else {
       return res.status(403).json({ msg: `Acceso no autorizado` });
@@ -179,7 +182,6 @@ const eliminarTicket = (req, res) => {
     return res.status(500).json({ msg: "Ha ocurrido un error", error: error });
   }
 };
-
 
 module.exports = {
   nuevoTicket,
