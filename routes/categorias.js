@@ -18,6 +18,9 @@ router.post(
 //TRAER TODAS LAS CATEGORIAS
 router.get("/", auth, categoriasController.traerCategorias);
 
+//TRAER TODAS LAS CATEGORIAS X DEPENDENCIA
+router.get("/:idDependencia", auth, categoriasController.traerCategoriasDependencia);
+
 //ACTUALIZAR CATEGORIA
 router.put("/", auth, categoriasController.actualizarCategoria);
 
