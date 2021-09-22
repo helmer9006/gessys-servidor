@@ -8,7 +8,6 @@ const app = express();
 // Conectar a la base de datos
 conectarDB();
 
-<<<<<<< HEAD
 // Habilitar Cors
 // const opcionesCors = {
 //   origin: process.env.FRONTEND_URL,
@@ -25,12 +24,10 @@ app.use((req, res, next) => {
   res.header("Allow", "GET, POST, OPTIONS, PUT, DELETE");
   next();
 });
-=======
 const opcionesCors = {
   origin: process.env.FRONTEND_URL,
 };
 app.use(cors(opcionesCors));
->>>>>>> 35410010d220ff85b64f79ba4f3d5bed0be1e134
 
 // Puerto de la app
 const port = process.env.PORT || 4000;

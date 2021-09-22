@@ -186,7 +186,6 @@ const eliminarTicket = (req, res) => {
   }
 };
 
-<<<<<<< HEAD
 //***************TRAER TICKETS POR ESTADO - DASHBOARD***************
 const traerTicketsPorFecha = async (req, res) => {
   console.log("GET - TRAER TICKETS POR FECHA");
@@ -353,11 +352,6 @@ const traerTicketsPorFecha = async (req, res) => {
   }
 }
 
-
-
-
-=======
->>>>>>> 35410010d220ff85b64f79ba4f3d5bed0be1e134
 module.exports = {
   nuevoTicket,
   traerTickets,
