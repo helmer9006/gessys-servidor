@@ -1,5 +1,8 @@
 const Tickets = require("../models/Ticket");
 const { validationResult, body } = require("express-validator");
+const Moment = require('moment');
+const mongoose = require("mongoose");
+Moment.locale("es"); //idioma español de moment 
 
 //***************CREAR NUEVO TICKET***************
 const nuevoTicket = async (req, res) => {
@@ -69,7 +72,7 @@ const traerTickets = async (req, res) => {
         .populate({ path: "usuario", select: "nombre" })
         .populate({ path: "categoria", select: "nombre" })
         .sort("-_id");
-      
+
       res.status(200).json(ticket);
     } else {
       return res.status(403).json({ msg: `Acceso no autorizado` });
@@ -180,11 +183,180 @@ const eliminarTicket = (req, res) => {
   }
 };
 
+//***************TRAER TICKETS POR ESTADO - DASHBOARD***************
+const traerTicketsPorFecha = async (req, res) => {
+  console.log("GET - TRAER TICKETS POR FECHA");
+  const perfil = req.usuario.perfil;
+  const dependencia = req.usuario.dependencia;
+  const idUsuario = req.usuario.id;
+
+  var dt = new Date();
+  fechaActual = Moment(dt).format("YYYY-MM-DD");
+  fechaActual = Moment(dt).add(1, "days")
+  fechaFinal = Moment(dt).subtract(30, "days");
+  fechaFinal = fechaFinal.format("YYYY-MM-DD");
+
+  let arrayEstadistica = []
+
+  try {
+    if (perfil == "estandar") {
+      Tickets.aggregate(
+        [
+          {
+            "$match": {
+              "creacion": {
+                "$gte": new Date(fechaFinal), "$lt": new Date(fechaActual),
+              },
+              "usuario": new mongoose.Types.ObjectId(idUsuario),
+            }
+          },
+          {
+            "$group": {
+              "_id": {
+                "año": { "$year": "$creacion" },
+                "mes": { "$month": "$creacion" },
+                "dia": { "$dayOfMonth": "$creacion" },
+              },
+              "cantidad": { "$sum": 1 },
+            }
+          },
+          { "$sort": { mes: 1 } }
+        ],
+        function (err, result) {
+          if (err) {
+            return res.status(500).json({ msg: "Ha ocurrido un error", error: err });
+          }
+          result.forEach(element => {
+            {
+              const fechaFormato = Moment(`${element._id.año}-${element._id.mes}-${element._id.dia}`, 'YYYY-M-D H:mm', 'America/Bogota');
+              const cantidad = element.cantidad;
+              const fecha = Moment(fechaFormato).utc().format("MMM DD")
+              arrayEstadistica.push({ fecha, cantidad })
+            }
+          });
+          arrayEstadistica.sort(function (a, b) {
+            if (a.fecha > b.fecha) {
+              return 1;
+            }
+            if (a.fecha < b.fecha) {
+              return -1;
+            }
+            return 0;
+          })
+          res.status(200).json(arrayEstadistica);
+        }
+      );
+    } else if (perfil === "especial") {
+      Tickets.aggregate(
+        [
+          {
+            "$match": {
+              "creacion": {
+                "$gte": new Date(fechaFinal), "$lt": new Date(fechaActual),
+              },
+              "dependencia": new mongoose.Types.ObjectId(dependencia),
+            }
+          },
+          {
+            "$group": {
+              "_id": {
+                "año": { "$year": "$creacion" },
+                "mes": { "$month": "$creacion" },
+                "dia": { "$dayOfMonth": "$creacion" },
+              },
+              "cantidad": { "$sum": 1 },
+            }
+          },
+          { "$sort": { mes: 1 } }
+        ],
+        function (err, result) {
+          if (err) {
+            return res.status(500).json({ msg: "Ha ocurrido un error", error: err });
+          }
+          console.log(result)
+          result.forEach(element => {
+            {
+              const fechaFormato = Moment(`${element._id.año}-${element._id.mes}-${element._id.dia}`, 'YYYY-M-D H:mm', 'America/Bogota');
+              const cantidad = element.cantidad;
+              const fecha = Moment(fechaFormato).utc().format("MMM DD")
+              arrayEstadistica.push({ fecha, cantidad })
+            }
+          });
+          arrayEstadistica.sort(function (a, b) {
+            if (a.fecha > b.fecha) {
+              return 1;
+            }
+            if (a.fecha < b.fecha) {
+              return -1;
+            }
+            // a must be equal to b
+            return 0;
+          })
+          res.status(200).json(arrayEstadistica);
+        }
+      );
+    } else if (perfil === "administrador") {
+      Tickets.aggregate(
+        [
+          {
+            "$match": {
+              "creacion": {
+                "$gte": new Date(fechaFinal), "$lt": new Date(fechaActual),
+              },
+            }
+          },
+          {
+            "$group": {
+              "_id": {
+                "año": { "$year": "$creacion" },
+                "mes": { "$month": "$creacion" },
+                "dia": { "$dayOfMonth": "$creacion" },
+              },
+              "cantidad": { "$sum": 1 },
+            }
+          },
+          { "$sort": { mes: 1 } }
+        ],
+        function (err, result) {
+          if (err) {
+            return res.status(500).json({ msg: "Ha ocurrido un error", error: err });
+          }
+          console.log(result)
+          result.forEach(element => {
+            {
+              const fechaFormato = Moment(`${element._id.año}-${element._id.mes}-${element._id.dia}`, 'YYYY-M-D H:mm', 'America/Bogota');
+              const cantidad = element.cantidad;
+              const fecha = Moment(fechaFormato).utc().format("MMM DD")
+              arrayEstadistica.push({ fecha, cantidad })
+            }
+          });
+          arrayEstadistica.sort(function (a, b) {
+            if (a.fecha > b.fecha) {
+              return 1;
+            }
+            if (a.fecha < b.fecha) {
+              return -1;
+            }
+            // a must be equal to b
+            return 0;
+          })
+          res.status(200).json(arrayEstadistica);
+        }
+      );
+    }
+  } catch (error) {
+    return res.status(500).json({ msg: `Ha ocurrido un error`, error: error });
+  }
+}
+
+
+
 
 module.exports = {
   nuevoTicket,
   traerTickets,
   traerTicketsPorEstado,
+  traerTicketsPorFecha,
   actualizarEstadoPorId,
   actualizarTicket,
   eliminarTicket,

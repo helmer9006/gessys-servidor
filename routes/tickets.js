@@ -24,7 +24,11 @@ router.post(
 router.get("/", auth, ticketsController.traerTickets);
 
 //TRAER TICKETS POR ESTADO
-router.get("/:estado", auth, ticketsController.traerTicketsPorEstado);
+// router.get("/:estado", auth, ticketsController.traerTicketsPorEstado);
+
+//TRAER TICKETS POR FECHA
+router.get("/fecha", auth, ticketsController.traerTicketsPorFecha);
+
 
 //ACTUALIZAR ESTADO DE TICKETS POR ID
 router.put("/:idTicket/:estado", auth, ticketsController.actualizarEstadoPorId);
