@@ -33,6 +33,18 @@ const traerCategorias = async (req, res) => {
   }
 };
 
+//***************TRAER TODAS LAS CATEGORIAS X ID DEPENDENCIA***************
+const traerCategoriasDependencia = async (req, res) => {
+  console.log("GET - TRAER TODAS LA CATEGORIAS X DEPENDENCIA");
+  const dependencia = req.params.idDependencia;
+  try {
+    const categorias = await Categorias.find({ dependencia: dependencia });
+    res.status(200).json(categorias);
+  } catch (error) {
+    return res.status(500).json({ msg: `Ha ocurrido un error`, error: error });
+  }
+};
+
 //***************MODIFICAR CATEGORIA***************
 const actualizarCategoria = (req, res) => {
   console.log("PUT - ACTUALIZAR CATEGORIA POR ID");
@@ -93,6 +105,7 @@ const eliminarCategoria = (req, res) => {
 module.exports = {
   nuevaCategoria,
   traerCategorias,
+  traerCategoriasDependencia,
   actualizarCategoria,
   eliminarCategoria,
 };

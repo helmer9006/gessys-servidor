@@ -39,5 +39,4 @@ router.put("/", auth, ticketsController.actualizarTicket);
 //ELIMINAR TICKET
 router.delete("/:idTicket", auth, ticketsController.eliminarTicket);
 
-
 module.exports = router;

@@ -25,7 +25,10 @@ const nuevoTicket = async (req, res) => {
     .sort({ field: "asc", _id: -1 })
     .limit(1);
 
-  nuevoTicket.codigo = ultimoTicket.codigo + 1;
+  ultimoTicket === null
+    ? (nuevoTicket.codigo = 1)
+    : (nuevoTicket.codigo = ultimoTicket.codigo + 1);
+
   ticket = new Tickets(nuevoTicket);
   try {
     await ticket.save();
@@ -183,6 +186,7 @@ const eliminarTicket = (req, res) => {
   }
 };
 
+<<<<<<< HEAD
 //***************TRAER TICKETS POR ESTADO - DASHBOARD***************
 const traerTicketsPorFecha = async (req, res) => {
   console.log("GET - TRAER TICKETS POR FECHA");
@@ -352,6 +356,8 @@ const traerTicketsPorFecha = async (req, res) => {
 
 
 
+=======
+>>>>>>> 35410010d220ff85b64f79ba4f3d5bed0be1e134
 module.exports = {
   nuevoTicket,
   traerTickets,
