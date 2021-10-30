@@ -1,6 +1,7 @@
 const express = require("express");
 const conectarDB = require("./config/db");
 const cors = require("cors");
+const Empresa = require("./models/Empresa");
 
 // crear el servidor
 const app = express();
@@ -51,6 +52,7 @@ app.use("/api/nuevos-campos", require("./routes/nuevosCampos"));
 app.use("/api/archivos", require("./routes/archivos"));
 app.use("/public", express.static(`${__dirname}/uploads`)); // Habilitar carpeta publica
 app.use("/api/dashboard", require("./routes/dashboard"));
+app.use("/api/empresa", require("./routes/empresa"));
 
 // Arrancar la app
 app.listen(port, "0.0.0.0", () => {
