@@ -2,6 +2,7 @@ const Tickets = require("../models/Ticket");
 const { validationResult, body } = require("express-validator");
 const Moment = require('moment');
 const mongoose = require("mongoose");
+const Ticket = require("../models/Ticket");
 Moment.locale("es"); //idioma español de moment 
 
 //***************CREAR NUEVO TICKET***************
@@ -184,7 +185,7 @@ const eliminarTicket = (req, res) => {
     }
 };
 
-//***************TRAER TICKETS POR ESTADO - DASHBOARD***************
+//***************TRAER TICKETS POR FECHA - DASHBOARD***************
 const traerTicketsPorFecha = async(req, res) => {
     console.log("GET - TRAER TICKETS POR FECHA");
     const perfil = req.usuario.perfil;
@@ -348,6 +349,27 @@ const traerTicketsPorFecha = async(req, res) => {
     }
 }
 
+
+//***************TRAER TICKETS POR RANGO FECHA Y USUARIO - DASHBOARD***************
+
+const traerTicketsRangoFechaPorUsuario = async(req, res) => {
+    console.log("GET - TRAER TICKETS POR RANGO DE FECHAS Y USUARIO");
+    const fechainicial = req.params.fechainicial;
+    const fechafinal = req.params.fechafinal;
+    const usuario = req.params.usuario;
+    const perfil = req.usuario.perfil;
+
+    if (perfil == 'administrador' || perfil == 'especial') {
+        try {
+            const resp = await Tickets.find({ creacion: { $gte: new Date(fechainicial), $lte: new Date(fechafinal) }, usuario: new mongoose.Types.ObjectId(usuario) });
+            res.status(200).json(resp);
+        } catch (error) {
+            return res.status(500).json({ msg: "Ha ocurrido un error", error: error });
+        }
+    } else {
+        return res.status(403).json({ msg: "Acceso no autorizado, sin privilegios." });
+    }
+}
 module.exports = {
     nuevoTicket,
     traerTickets,
@@ -356,4 +378,5 @@ module.exports = {
     actualizarEstadoPorId,
     actualizarTicket,
     eliminarTicket,
+    traerTicketsRangoFechaPorUsuario
 };

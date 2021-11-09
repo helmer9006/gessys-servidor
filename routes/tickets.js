@@ -6,18 +6,17 @@ const auth = require("../middleware/auth");
 
 //CREAR NUEVO TICKETS
 router.post(
-  "/",
-  auth,
-  [
-    check("titulo", "El Nombre es Obligatorio").not().isEmpty(),
-    //check("codigo", "El area es Obligatoria").not().isEmpty(),
-    check("descripcion", "El area es Obligatoria").not().isEmpty(),
-    check("tipo", "El tipo es Obligatorio").not().isEmpty(),
-    check("dependencia", "La dependencia es Obligatoria").not().isEmpty(),
-    check("categoria", "La categoria es Obligatoria").not().isEmpty(),
-    check("prioridad", "La prioridad es Obligatoria").not().isEmpty(),
-  ],
-  ticketsController.nuevoTicket
+    "/",
+    auth, [
+        check("titulo", "El Nombre es Obligatorio").not().isEmpty(),
+        //check("codigo", "El area es Obligatoria").not().isEmpty(),
+        check("descripcion", "El area es Obligatoria").not().isEmpty(),
+        check("tipo", "El tipo es Obligatorio").not().isEmpty(),
+        check("dependencia", "La dependencia es Obligatoria").not().isEmpty(),
+        check("categoria", "La categoria es Obligatoria").not().isEmpty(),
+        check("prioridad", "La prioridad es Obligatoria").not().isEmpty(),
+    ],
+    ticketsController.nuevoTicket
 );
 
 //TRAER TODOS LOS TICKETS
@@ -28,6 +27,9 @@ router.get("/", auth, ticketsController.traerTickets);
 
 //TRAER TICKETS POR FECHA
 router.get("/fecha", auth, ticketsController.traerTicketsPorFecha);
+
+//TRAER TICKETS POR RANGO DE FECHAS Y USUARIO
+router.get("/fecha/:fechainicial/:fechafinal/:usuario", auth, ticketsController.traerTicketsRangoFechaPorUsuario);
 
 
 //ACTUALIZAR ESTADO DE TICKETS POR ID
