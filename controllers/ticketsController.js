@@ -92,7 +92,6 @@ const traerTicketsPorEstado = async(req, res) => {
     const perfil = req.usuario.perfil;
     const dependencia = req.usuario.dependencia;
     const idUsuario = req.usuario.id;
-
     try {
         if (perfil === "estandar") {
             const ticket = await Tickets.find({ estado: estado, usuario: idUsuario });
@@ -349,7 +348,6 @@ const traerTicketsPorFecha = async(req, res) => {
     }
 }
 
-
 //***************TRAER TICKETS POR RANGO FECHA Y USUARIO - DASHBOARD***************
 
 const traerTicketsRangoFechaPorUsuario = async(req, res) => {
@@ -361,14 +359,31 @@ const traerTicketsRangoFechaPorUsuario = async(req, res) => {
 
     if (perfil == 'administrador' || perfil == 'especial') {
         try {
-            const resp = await Tickets.find({ creacion: { $gte: new Date(fechainicial), $lte: new Date(fechafinal) }, usuario: new mongoose.Types.ObjectId(usuario) });
-            res.status(200).json(resp);
+            const resp = await Tickets.find({ creacion: { $gte: new Date(fechainicial), $lte: new Date(fechafinal) }, usuario: new mongoose.Types.ObjectId(usuario) })
+                .populate({ path: "dependencia", select: "nombre" })
+                .populate({ path: "usuario", select: "nombre" })
+                .populate({ path: "categoria", select: "nombre" })
+                .sort("-_id");
+            const result = await formateoTickets(resp);
+            res.status(200).json(result);
         } catch (error) {
             return res.status(500).json({ msg: "Ha ocurrido un error", error: error });
         }
     } else {
         return res.status(403).json({ msg: "Acceso no autorizado, sin privilegios." });
     }
+}
+
+
+function formateoTickets(data) {
+    try {
+
+        data.forEach((t) => t.creacion = Moment(t.creacion).format("DD-MM-YYYY hh:mm a"));
+        return data
+    } catch (error) {
+        console.log(error)
+    }
+
 }
 module.exports = {
     nuevoTicket,
